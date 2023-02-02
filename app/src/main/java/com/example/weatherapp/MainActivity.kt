@@ -5,8 +5,10 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import android.widget.Toast.*
 import com.example.weatherapp.databinding.ActivityMainBinding
+import com.example.weatherapp.json_processing.WeatherParse
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
@@ -17,14 +19,18 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 lateinit var binding: ActivityMainBinding
 class MainActivity : AppCompatActivity() {
-    val API_URL = "http://api.weatherapi.com/"
-    val API_KEY = "a2c054487d1040eb8fe145528232601"
+    //val API_URL = "http://api.weatherapi.com/"
+    //val API_KEY = "a2c054487d1040eb8fe145528232601"
+    private val apiKey = ApiKey().getApi()
+    private val apiUrl = ApiKey().getUrl()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        val visibilitySetting = VisibilitySetting(binding)
 
+        // функция включения/отключения видимости полей на главном экране
         fun setVisible(arg:Boolean){
             if (arg){
                 binding.mainLayout.setVisibility(View.VISIBLE)
@@ -37,8 +43,8 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        // функція обробки Json файлу з данними погоди, і виводу на актівіті
-        fun parseWeatherData(responceData:WeatherParse){
+        // функция обработки Json файла с данными погоды, и вывода их на активити
+        fun parseWeatherData(responceData: WeatherParse){
             binding.txtCityName.text = "${responceData.location.name}, ${responceData.location.country}"
             // temperatura
             //now
@@ -56,7 +62,7 @@ class MainActivity : AppCompatActivity() {
             val txtTemp4DayId = findViewById<TextView>(R.id.txt4DayTemperature)
             txtTemp4DayId.text = "$temp4Day°C"
             //temperature feels like now
-            binding.txtFeelsLike.text = "${responceData.current.feelslike_c.toString()}°C"
+            binding.txtFeelsLike.text = "Feels like ${responceData.current.feelslike_c.toString()}°C"
             //min temperature now
             binding.txtMinTemperature.text = "Min ${responceData.forecast.forecastday[0].day.mintemp_c}°C"
             //max temperature now
@@ -86,49 +92,55 @@ class MainActivity : AppCompatActivity() {
             val date4Day = responceData.forecast.forecastday[3].date.split("-")
             val txtDate4DayId = findViewById<TextView>(R.id.txt4DayLabel)
             txtDate4DayId.text = "${date4Day[2]}-${date4Day[1]}"
-            setVisible(true)
+             // включение видимости полей с данными на экране
+                //setVisible(true)
+            visibilitySetting.setVisibleAfterGetWeather()
         }
 
-
-        // функція запиту на сервер для отримання данних погоди
+        // функция запроса на сервер для получения данных
         fun requestToApi(url:String, city:String,key:String) {
             val retrofit = Retrofit.Builder()
                 .baseUrl(url)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
-            val myApi = retrofit.create(MyApi::class.java)//.apply { this.city = city }
+            val myApi = retrofit.create(MyApi::class.java)
             myApi.getData(key, city, 4).enqueue(object : Callback<WeatherParse> {
                 override fun onResponse(call: Call<WeatherParse>, response: Response<WeatherParse>) {
-                    if (response.isSuccessful) { parseWeatherData(response.body()!!)}  // используйте данные
+                   when(response.code()){
+                       // обработка положительного результата от сервера
+                       200 -> if (response.isSuccessful) { parseWeatherData(response.body()!!) }
+                       // обработка ошибки от сервера
+                       400 -> { Toast.makeText(this@MainActivity,
+                           "Err: ${JSONObject(response.errorBody()!!.string()).getJSONObject("error").getString("message")}",
+                           LENGTH_LONG).show()
+                           visibilitySetting.setInvisibleAfterGetErrCode()  }
+                    }
                 }
                 override fun onFailure(call: Call<WeatherParse>, t: Throwable) {
-                    Log.d("TestMsg","Err $t:")// обробка помилки
+                    Log.d("TestMsg","Err $t:")// обработка ошибки соединения
                 }
             })
         }
-
-
-        //ОСНОВНА РОБОТА!!!
-        //запуск слушатєля натискань
-        binding.mainLayout.setVisibility(View.INVISIBLE)  //  тимчасово!!
-        binding.forecastLayout.setVisibility(View.INVISIBLE)  // тимчасово!!
+        //ОСНОВНАЯ РАБОТА!!!
+        //запуск слушатєля нажатий
+        binding.mainLayout.setVisibility(View.INVISIBLE)  //  временно!!
+        binding.forecastLayout.setVisibility(View.INVISIBLE)  // временно!!
         binding.btnFindCity.setOnClickListener {
-            // обробка введеного користувачем тексту
+            // обробка введеного пользователем текста
             val city = binding.txtPlEntertCity.text.toString().lowercase().trim().replace(" ","+",true)
-            // якщо було введено місто то запит на сервер
+            // если был введён город, то запрос на сервер
             if (city.isNotEmpty()){
                 setVisible(false)
-                requestToApi(API_URL,city,API_KEY)
-            // якщо ні то вспливаюче повідомлення про необхідність ввести місто
-            } else makeText(this,"Enter the city!", LENGTH_LONG).show()
+                requestToApi(apiUrl,city,apiKey)
+            // если нет то вспливающее сообщение о необходимости ввести город
+            } else {
+                makeText(this,"Enter the city!", LENGTH_LONG).show()
+                visibilitySetting.setInvisibleAfterGetErrCode()
+            }
+          }
         }
-
     }
 
-
-
-
-}
 
 
 
