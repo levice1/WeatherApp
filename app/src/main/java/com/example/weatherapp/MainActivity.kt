@@ -17,31 +17,16 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
-lateinit var binding: ActivityMainBinding
+
 class MainActivity : AppCompatActivity() {
-    //val API_URL = "http://api.weatherapi.com/"
-    //val API_KEY = "a2c054487d1040eb8fe145528232601"
     private val apiKey = ApiKey().getApi()
     private val apiUrl = ApiKey().getUrl()
-
+    lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val visibilitySetting = VisibilitySetting(binding)
-
-        // функция включения/отключения видимости полей на главном экране
-        fun setVisible(arg:Boolean){
-            if (arg){
-                binding.mainLayout.setVisibility(View.VISIBLE)
-                binding.forecastLayout.setVisibility(View.VISIBLE)
-                binding.btnFindCity.setVisibility(View.VISIBLE)
-                binding.progressBar.setVisibility(View.INVISIBLE)
-            } else {
-                binding.btnFindCity.setVisibility(View.INVISIBLE)
-                binding.progressBar.setVisibility(View.VISIBLE)
-            }
-        }
 
         // функция обработки Json файла с данными погоды, и вывода их на активити
         fun parseWeatherData(responceData: WeatherParse){
@@ -111,7 +96,7 @@ class MainActivity : AppCompatActivity() {
                        200 -> if (response.isSuccessful) { parseWeatherData(response.body()!!) }
                        // обработка ошибки от сервера
                        400 -> { Toast.makeText(this@MainActivity,
-                           "Err: ${JSONObject(response.errorBody()!!.string()).getJSONObject("error").getString("message")}",
+                           JSONObject(response.errorBody()!!.string()).getJSONObject("error").getString("message"),
                            LENGTH_LONG).show()
                            visibilitySetting.setInvisibleAfterGetErrCode()  }
                     }
@@ -121,21 +106,17 @@ class MainActivity : AppCompatActivity() {
                 }
             })
         }
+
         //ОСНОВНАЯ РАБОТА!!!
-        //запуск слушатєля нажатий
-        binding.mainLayout.setVisibility(View.INVISIBLE)  //  временно!!
-        binding.forecastLayout.setVisibility(View.INVISIBLE)  // временно!!
-        binding.btnFindCity.setOnClickListener {
-            // обробка введеного пользователем текста
-            val city = binding.txtPlEntertCity.text.toString().lowercase().trim().replace(" ","+",true)
-            // если был введён город, то запрос на сервер
-            if (city.isNotEmpty()){
-                setVisible(false)
-                requestToApi(apiUrl,city,apiKey)
-            // если нет то вспливающее сообщение о необходимости ввести город
-            } else {
-                makeText(this,"Enter the city!", LENGTH_LONG).show()
-                visibilitySetting.setInvisibleAfterGetErrCode()
+        visibilitySetting.setInvisibleForStart() // для удобства разработки
+        binding.btnFindCity.setOnClickListener {  //запуск слушатєля нажатий
+            val city = binding.txtPlEntertCity.text.toString().lowercase().trim().replace(" ","+",true) // обработка текста введённого пользователем
+            if (city.isNotEmpty()){  // если был введён город, то запрос на сервер
+                visibilitySetting.setInvisibleAfterPressBtn() // спрятать кнопку и показать прогресс бар
+                requestToApi(apiUrl,city,apiKey) // сам запрос
+            } else { // если ничего не было введено
+                makeText(this,"Enter the city!", LENGTH_LONG).show() // тост сообщение о необходимости ввести город
+                visibilitySetting.setInvisibleAfterGetErrCode() // спрятать прогресс бар и показать кнопку
             }
           }
         }
@@ -146,8 +127,24 @@ class MainActivity : AppCompatActivity() {
 
 
 
+/*
+//старая функция включения/отключения видимости полей на главном экране
+fun setVisible(arg:Boolean){
+    if (arg){
+        binding.mainLayout.setVisibility(View.VISIBLE)
+        binding.forecastLayout.setVisibility(View.VISIBLE)
+        binding.btnFindCity.setVisibility(View.VISIBLE)
+        binding.progressBar.setVisibility(View.INVISIBLE)
+    } else {
+        binding.btnFindCity.setVisibility(View.INVISIBLE)
+        binding.progressBar.setVisibility(View.VISIBLE)
+    }
+}
 
-/* стара функція запросу по api, також робоча, використовується разом з функією ParseWeatherData
+
+
+//стара функція запросу по api, також робоча, використовується разом з функією ParseWeatherData
+
 fun requestToApi(url:String){
     val queue = Volley.newRequestQueue(this)
     val request = StringRequest( Request.Method.GET, url,
@@ -156,7 +153,7 @@ fun requestToApi(url:String){
     queue.add(request)
 }
 
- // функція обробки Json файлу з данними погоди, і виводу на актівіті
+// функція обробки Json файлу з данними погоди, і виводу на актівіті
         fun parseWeatherData2 (result :String){
 
             //city and country

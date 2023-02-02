@@ -19,4 +19,8 @@ class VisibilitySetting(var binding: ActivityMainBinding) {
         binding.btnFindCity.setVisibility(View.VISIBLE)
         binding.progressBar.setVisibility(View.INVISIBLE)
     }
+    fun setInvisibleForStart(){
+        binding.mainLayout.setVisibility(View.INVISIBLE)
+        binding.forecastLayout.setVisibility(View.INVISIBLE)
+    }
 }
