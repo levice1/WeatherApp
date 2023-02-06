@@ -1,4 +1,29 @@
 <resources>
     <string name="app_name">WeatherApp</string>
     <string name="celsium">°C</string>
+    <string name="khp">Khp</string>
+    <string name="persent">%</string>
+    <string name="hpa">hPa</string>
+    <string name="city_name">Odessa, Ukraine</string>
+    <string name="temp">27°C</string>
+    <string name="temp_min">Min 27°C</string>
+    <string name="temp_max">Max 27°C</string>
+    <string name="date">28.03</string>
+    <string name="weather">Cloudy</string>
+    <string name="enter_city_label">Enter city...</string>
+    <string name="feels_like">Feels like</string>
+    <string name="wind_speed">Wind speed</string>
+    <string name="humidity">Humidity</string>
+    <string name="visibility">Visibility</string>
+    <string name="visibility_clear">It is absolutely clear at the moment</string>
+    <string name="visibility_low">Change text!!! clear at the moment</string>
+    <string name="visibility_middle">Change text!!! clear at the moment</string>
+    <string name="visibility_high">Change text!!! clear at the moment</string>
+    <string name="precipitation">Precipitation</string>
+    <string name="precipitation_none">No precipitation expected for the next 24 hours</string>
+    <string name="precipitation_low">Change text!!! for the next 24 hours</string>
+    <string name="precipitation_middle">Change text!!! for the next 24 hours</string>
+    <string name="precipitation_high">Change text!!! for the next 24 hours</string>
+    <string name="pressure">Pressure</string>
+
 </resources>
