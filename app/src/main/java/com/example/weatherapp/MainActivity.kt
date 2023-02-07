@@ -46,6 +46,14 @@ class MainActivity : AppCompatActivity() {
             val temp4Day = responceData.forecast.forecastday[3].day.avgtemp_c
             val txtTemp4DayId = findViewById<TextView>(R.id.txt4DayTemperature)
             txtTemp4DayId.text = "$temp4Day°C"
+            //5day
+            val temp5Day = responceData.forecast.forecastday[4].day.avgtemp_c
+            val txtTemp5DayId = findViewById<TextView>(R.id.txt5DayTemperature)
+            txtTemp5DayId.text = "$temp5Day°C"
+            //6day
+            val temp6Day = responceData.forecast.forecastday[5].day.avgtemp_c
+            val txtTemp6DayId = findViewById<TextView>(R.id.txt6DayTemperature)
+            txtTemp6DayId.text = "$temp6Day°C"
             //temperature feels like now
             binding.txtFeelsLike.text = "Feels like ${responceData.current.feelslike_c.toString()}°C"
             //min temperature now
@@ -64,6 +72,12 @@ class MainActivity : AppCompatActivity() {
             //4day
             val txtWeather4DayId = findViewById<TextView>(R.id.txt4DayWeather)
             txtWeather4DayId.text = responceData.forecast.forecastday[3].day.condition.text
+            //5day
+            val txtWeather5DayId = findViewById<TextView>(R.id.txt5DayWeather)
+            txtWeather5DayId.text = responceData.forecast.forecastday[4].day.condition.text
+            //6day
+            val txtWeather6DayId = findViewById<TextView>(R.id.txt6DayWeather)
+            txtWeather6DayId.text = responceData.forecast.forecastday[5].day.condition.text
             //day
             //2day
             val date2Day = responceData.forecast.forecastday[1].date.split("-")
@@ -77,8 +91,15 @@ class MainActivity : AppCompatActivity() {
             val date4Day = responceData.forecast.forecastday[3].date.split("-")
             val txtDate4DayId = findViewById<TextView>(R.id.txt4DayLabel)
             txtDate4DayId.text = "${date4Day[2]}-${date4Day[1]}"
+            //5day
+            val date5Day = responceData.forecast.forecastday[4].date.split("-")
+            val txtDate5DayId = findViewById<TextView>(R.id.txt5DayLabel)
+            txtDate5DayId.text = "${date5Day[2]}-${date5Day[1]}"
+            //6day
+            val date6Day = responceData.forecast.forecastday[5].date.split("-")
+            val txtDate6DayId = findViewById<TextView>(R.id.txt6DayLabel)
+            txtDate6DayId.text = "${date6Day[2]}-${date6Day[1]}"
              // включение видимости полей с данными на экране
-                //setVisible(true)
             visibilitySetting.setVisibleAfterGetWeather()
         }
 
@@ -89,7 +110,7 @@ class MainActivity : AppCompatActivity() {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
             val myApi = retrofit.create(MyApi::class.java)
-            myApi.getData(key, city, 4).enqueue(object : Callback<WeatherParse> {
+            myApi.getData(key, city, 6).enqueue(object : Callback<WeatherParse> {
                 override fun onResponse(call: Call<WeatherParse>, response: Response<WeatherParse>) {
                    when(response.code()){
                        // обработка положительного результата от сервера

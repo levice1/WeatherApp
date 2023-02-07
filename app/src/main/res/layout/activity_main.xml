@@ -5,7 +5,7 @@
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient"
+    android:background="#0B1221"
     android:pointerIcon="zoom_in"
     tools:context=".MainActivity">
 
@@ -14,9 +14,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="84dp"
         android:layout_marginEnd="20dp"
-        android:background="@drawable/data_background"
         android:orientation="vertical"
         android:padding="15dp"
         android:visibility="visible"
@@ -29,17 +28,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="--"
+            android:text="@string/city_name"
             android:textSize="30sp"
-            android:visibility="visible" />
-
-        <TextView
-            android:id="@+id/txtMaxTemperature"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:gravity="center"
-            android:text="--"
             android:visibility="visible" />
 
         <TextView
@@ -47,168 +37,261 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
+            android:layout_marginTop="35dp"
             android:gravity="center"
-            android:text="--"
+            android:text="@string/temp"
             android:textSize="70sp"
-            android:visibility="visible" />
-
-        <TextView
-            android:id="@+id/txtMinTemperature"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:gravity="center"
-            android:text="--"
-            android:visibility="visible" />
-
-        <TextView
-            android:id="@+id/txtFeelsLike"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:text="--"
-            android:textSize="20sp"
             android:visibility="visible" />
 
         <TextView
             android:id="@+id/txtWeather"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="35dp"
             android:gravity="center"
-            android:text="--"
+            android:text="@string/weather"
             android:textSize="40sp"
             android:visibility="visible" />
 
+        <LinearLayout
+            android:id="@+id/min_max_temp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="35dp"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:id="@+id/txtMinTemperature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="30dp"
+                android:gravity="center"
+                android:text="@string/temp_min"
+                android:visibility="visible" />
+            <TextView
+                android:id="@+id/txtMaxTemperature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:gravity="center"
+                android:text="@string/temp_max"
+                android:visibility="visible" />
+
+
+        </LinearLayout>
+
     </LinearLayout>
 
-
-    <LinearLayout
-        android:id="@+id/forecastLayout"
-        android:layout_width="0dp"
+    <HorizontalScrollView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:gravity="center|fill"
-        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:scrollbars="none"
         app:layout_constraintTop_toBottomOf="@+id/mainLayout">
 
         <LinearLayout
-            android:id="@+id/secondDay"
-            android:layout_width="110dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/data_background"
-            android:gravity="left"
-            android:orientation="vertical">
+            android:id="@+id/forecastLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:baselineAligned="false"
+            android:gravity="center|fill"
+            android:orientation="horizontal"
+            android:paddingEnd="25dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mainLayout"
+            tools:ignore="ExtraText,VisualLintBounds">
 
-            <TextView
-                android:id="@+id/txt2DayLabel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="20dp"
-                android:gravity="center_horizontal"
-                android:text="Monday" />
+            <LinearLayout
+                android:id="@+id/secondDay"
+                android:layout_width="110dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/data_background"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/txt2DayTemperature"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                <TextView
+                    android:id="@+id/txt2DayLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="20dp"
+                    android:gravity="center_horizontal"
+                    android:text="@string/date" />
+
+                <TextView
+                    android:id="@+id/txt2DayTemperature"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/temp"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/txt2DayWeather"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center"
+                    android:text="@string/weather"
+                    android:textSize="14sp"
+                    tools:ignore="TextSizeCheck" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/thirthDay"
+                android:layout_width="110dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/data_background"
                 android:gravity="center"
-                android:text="25oC"
-                android:textSize="24sp" />
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/txt2DayWeather"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:gravity="center"
-                android:text="Rain"
-                android:textSize="14dp"
-                tools:ignore="TextSizeCheck" />
+                <TextView
+                    android:id="@+id/txt3DayLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="20dp"
+                    android:gravity="center_horizontal"
+                    android:text="@string/date" />
+
+                <TextView
+                    android:id="@+id/txt3DayTemperature"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/temp"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/txt3DayWeather"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center"
+                    android:text="@string/weather"
+                    android:textSize="14sp"
+                    tools:ignore="TextSizeCheck" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/fourthDay"
+                android:layout_width="110dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/data_background"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txt4DayLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="20dp"
+                    android:gravity="center_horizontal"
+                    android:text="@string/date" />
+
+                <TextView
+                    android:id="@+id/txt4DayTemperature"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/temp"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/txt4DayWeather"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center"
+                    android:text="@string/weather"
+                    android:textSize="14sp"
+                    tools:ignore="TextSizeCheck" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/fiveDay"
+                android:layout_width="110dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/data_background"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txt5DayLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="20dp"
+                    android:gravity="center_horizontal"
+                    android:text="@string/date" />
+
+                <TextView
+                    android:id="@+id/txt5DayTemperature"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/temp"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/txt5DayWeather"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center"
+                    android:text="@string/weather"
+                    android:textSize="14sp"
+                    tools:ignore="TextSizeCheck" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/sixDay"
+                android:layout_width="110dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/data_background"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txt6DayLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="20dp"
+                    android:gravity="center_horizontal"
+                    android:text="@string/date" />
+
+                <TextView
+                    android:id="@+id/txt6DayTemperature"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/temp"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/txt6DayWeather"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center"
+                    android:text="@string/weather"
+                    android:textSize="14sp"
+                    tools:ignore="TextSizeCheck" />
+            </LinearLayout>
         </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/thirthDay"
-            android:layout_width="110dp"
-            android:layout_height="match_parent"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
-            android:layout_weight="1"
-            android:background="@drawable/data_background"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/txt3DayLabel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="20dp"
-                android:gravity="center_horizontal"
-                android:text="Monday" />
-
-            <TextView
-                android:id="@+id/txt3DayTemperature"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="25jC"
-                android:textSize="24sp" />
-
-            <TextView
-                android:id="@+id/txt3DayWeather"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:gravity="center"
-                android:text="Rain"
-                android:textSize="14dp"
-                tools:ignore="TextSizeCheck" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/fourthDay"
-            android:layout_width="110dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/data_background"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/txt4DayLabel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="20dp"
-                android:gravity="center_horizontal"
-                android:text="Monday" />
-
-            <TextView
-                android:id="@+id/txt4DayTemperature"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="25oC"
-                android:textSize="24sp" />
-
-            <TextView
-                android:id="@+id/txt4DayWeather"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:gravity="center"
-                android:text="Rain"
-                android:textSize="14dp"
-                tools:ignore="TextSizeCheck" />
-        </LinearLayout>
-
-    </LinearLayout>
+    </HorizontalScrollView>
 
     <EditText
         android:id="@+id/txtPlEntertCity"
@@ -220,7 +303,7 @@
         android:autofillHints="postalAddress"
         android:background="@drawable/data_background"
         android:ems="10"
-        android:hint="enter city"
+        android:hint="@string/enter_city_label"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         android:padding="10dp"
@@ -234,8 +317,8 @@
 
     <Button
         android:id="@+id/btnFindCity"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="52dp"
@@ -263,5 +346,18 @@
         app:layout_constraintEnd_toEndOf="@+id/btnFindCity"
         app:layout_constraintStart_toStartOf="@+id/btnFindCity"
         app:layout_constraintTop_toTopOf="@+id/btnFindCity" />
+
+    <TextView
+        android:id="@+id/txtFeelsLike"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="1000dp"
+        android:gravity="center"
+        android:text="@string/feels_like"
+        android:textSize="20sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="0dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
