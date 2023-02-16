@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">WeatherApp</string>
+    <string name="get_weather_btn">Get</string>
+    <string name="more_info_btn">More details...</string>
     <string name="celsium">°C</string>
     <string name="khp">Khp</string>
     <string name="persent">%</string>

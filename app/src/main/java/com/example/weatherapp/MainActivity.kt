@@ -116,7 +116,7 @@ class MainActivity : AppCompatActivity() {
                        // обработка положительного результата от сервера
                        200 -> if (response.isSuccessful) { parseWeatherData(response.body()!!) }
                        // обработка ошибки от сервера
-                       400 -> { Toast.makeText(this@MainActivity,
+                       400,401,403 -> { Toast.makeText(this@MainActivity,
                            JSONObject(response.errorBody()!!.string()).getJSONObject("error").getString("message"),
                            LENGTH_LONG).show()
                            visibilitySetting.setInvisibleAfterGetErrCode()  }
