@@ -5,4 +5,4 @@ data class WeatherParse(
     val forecast: Forecast,
     val location: Location,
     val error: Error
-)
+):java.io.Serializable

@@ -1,5 +1,6 @@
 package com.example.weatherapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -28,8 +29,20 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         val visibilitySetting = VisibilitySetting(binding)
 
+        // функция запуска активити с ДЕТАЛЯМИ о погоде
+        fun showDetails(responceData:WeatherParse){
+            val intent = Intent(this,DetailsWeatherActivity::class.java)
+            intent.putExtra ("responseData",responceData)
+            startActivity(intent)
+        }
+
         // функция обработки Json файла с данными погоды, и вывода их на активити
         fun parseWeatherData(responceData: WeatherParse){
+
+            binding.btnDetails.setOnClickListener(){
+                showDetails(responceData)
+            }
+
             binding.txtCityName.text = "${responceData.location.name}, ${responceData.location.country}"
             // temperatura
             //now
@@ -55,7 +68,7 @@ class MainActivity : AppCompatActivity() {
             val txtTemp6DayId = findViewById<TextView>(R.id.txt6DayTemperature)
             txtTemp6DayId.text = "$temp6Day°C"
             //temperature feels like now
-            binding.txtFeelsLike.text = "Feels like ${responceData.current.feelslike_c.toString()}°C"
+            //!!!!!!!!binding.txtFeelsLike.text = "Feels like ${responceData.current.feelslike_c.toString()}°C"
             //min temperature now
             binding.txtMinTemperature.text = "Min ${responceData.forecast.forecastday[0].day.mintemp_c}°C"
             //max temperature now
@@ -79,6 +92,10 @@ class MainActivity : AppCompatActivity() {
             val txtWeather6DayId = findViewById<TextView>(R.id.txt6DayWeather)
             txtWeather6DayId.text = responceData.forecast.forecastday[5].day.condition.text
             //day
+            // now
+            // date
+            val date = responceData.forecast.forecastday[0].date.split("-")
+            binding.txtDateNow.text = "${date[2]}.${date[1]}.${date[0]}"
             //2day
             val date2Day = responceData.forecast.forecastday[1].date.split("-")
             val txtDate2DayId = findViewById<TextView>(R.id.txt2DayLabel)
@@ -127,6 +144,7 @@ class MainActivity : AppCompatActivity() {
                 }
             })
         }
+
 
         //ОСНОВНАЯ РАБОТА!!!
         visibilitySetting.setInvisibleForStart() // для удобства разработки

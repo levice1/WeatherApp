@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:layout_margin="5dp"
+    android:background="#48515e"
+    android:elevation="10dp"
+    app:cardCornerRadius="10dp">
+
+    <LinearLayout
+        android:id="@+id/feelsLike"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#48515e"
+        android:gravity="center_horizontal|center_vertical"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:id="@+id/labelFeelsLike"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal|center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/img_label_item"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:paddingEnd="5dp"
+                app:srcCompat="@drawable/icon_feels_like" />
+
+            <TextView
+                android:id="@+id/txtLabelItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/feels_like" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtDataItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/temp"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/txtDescriptionItem"
+                android:layout_width="158dp"
+                android:layout_height="56dp"
+                android:text="@string/feels_like_text"
+                android:textAlignment="center"
+                tools:visibility="visible" />
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

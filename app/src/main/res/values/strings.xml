@@ -5,6 +5,7 @@
     <string name="celsium">°C</string>
     <string name="khp">Khp</string>
     <string name="persent">%</string>
+    <string name="mm">mm</string>
     <string name="hpa">hPa</string>
     <string name="city_name">Odessa, Ukraine</string>
     <string name="temp">27°C</string>
@@ -12,8 +13,11 @@
     <string name="temp_max">Max 27°C</string>
     <string name="date">28.03</string>
     <string name="weather">Cloudy</string>
+    <string name="cloudy">Cloudy</string>
+    <string name="uv_index">UV Index</string>
     <string name="enter_city_label">Enter city...</string>
     <string name="feels_like">Feels like</string>
+    <string name="feels_like_text">The wind makes the weather seem cooler</string>
     <string name="wind_speed">Wind speed</string>
     <string name="humidity">Humidity</string>
     <string name="visibility">Visibility</string>
