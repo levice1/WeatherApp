@@ -7,4 +7,4 @@ data class Astro(
     val moonset: String,
     val sunrise: String,
     val sunset: String
-)
+):java.io.Serializable
