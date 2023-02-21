@@ -1,14 +1,13 @@
-package com.example.weatherapp.domen
+package com.example.weatherapp.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapp.R
 import com.example.weatherapp.databinding.ActivityDetailsWeatherBinding
-import com.example.weatherapp.json_processing.WeatherParse
-import com.example.weatherapp.recycler_view_details.DetailAdapter
-import com.example.weatherapp.recycler_view_details.DetailDataModel
+import com.example.weatherapp.domain.DetailsRecyclerViewAdapter
+import com.example.weatherapp.domain.models.json_processing.WeatherParse
+import com.example.weatherapp.domain.models.DetailDataModel
 
 class DetailsWeatherActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,18 +15,17 @@ class DetailsWeatherActivity : AppCompatActivity() {
         binding = ActivityDetailsWeatherBinding.inflate(layoutInflater)
         setContentView(binding.root)
         var intentData = intent?.getSerializableExtra("responseData") as WeatherParse
-        Log.d("TestMsg","End: $intentData")
         parseWeatherData(intentData)
         initRecyclerView()
     }
 
     lateinit var binding: ActivityDetailsWeatherBinding
-    lateinit var adapter: DetailAdapter
+    lateinit var adapter: DetailsRecyclerViewAdapter
     lateinit var recyclerView:RecyclerView
 
     var weatherDataList = ArrayList<DetailDataModel>()
 
-    private fun parseWeatherData(responceData:WeatherParse){
+    private fun parseWeatherData(responceData: WeatherParse){
         //now
         // city name
         binding.txtCityName.text = "${responceData.location.name}, ${responceData.location.country}"
@@ -133,7 +131,7 @@ class DetailsWeatherActivity : AppCompatActivity() {
 
     private fun initRecyclerView(){
         recyclerView = binding.additionalItems
-        adapter = DetailAdapter()
+        adapter = DetailsRecyclerViewAdapter()
         recyclerView.adapter = adapter
         adapter.setList(weatherDataList)
 

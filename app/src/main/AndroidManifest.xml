@@ -15,10 +15,10 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".domen.DetailsWeatherActivity"
+            android:name=".presentation.DetailsWeatherActivity"
             android:exported="false" />
         <activity
-            android:name=".domen.MainActivity"
+            android:name=".presentation.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

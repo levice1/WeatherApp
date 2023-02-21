@@ -1,4 +1,4 @@
-package com.example.weatherapp.json_processing
+package com.example.weatherapp.domain.models.json_processing
 
 data class Astro(
     val moon_illumination: String,

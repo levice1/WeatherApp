@@ -1,12 +1,13 @@
-package com.example.weatherapp.recycler_view_details
+package com.example.weatherapp.domain
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapp.databinding.DetailsItemLayoutBinding
+import com.example.weatherapp.domain.models.DetailDataModel
 
-class DetailAdapter : RecyclerView.Adapter<DetailAdapter.ViewHolder>() {
+class DetailsRecyclerViewAdapter : RecyclerView.Adapter<DetailsRecyclerViewAdapter.ViewHolder>() {
     inner class ViewHolder(val binding: DetailsItemLayoutBinding): RecyclerView.ViewHolder(binding.root)
 
     private var detailsList = ArrayList<DetailDataModel>()
