@@ -1,13 +1,13 @@
-package com.example.weatherapp
+package com.example.weatherapp.domen
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import android.widget.Toast.*
+import com.example.weatherapp.R
 import com.example.weatherapp.databinding.ActivityMainBinding
 import com.example.weatherapp.json_processing.WeatherParse
 import org.json.JSONObject
@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
 
         // функция запуска активити с ДЕТАЛЯМИ о погоде
         fun showDetails(responceData:WeatherParse){
-            val intent = Intent(this,DetailsWeatherActivity::class.java)
+            val intent = Intent(this, DetailsWeatherActivity::class.java)
             intent.putExtra ("responseData",responceData)
             startActivity(intent)
         }

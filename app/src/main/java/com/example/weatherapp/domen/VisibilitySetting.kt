@@ -1,4 +1,4 @@
-package com.example.weatherapp
+package com.example.weatherapp.domen
 
 import android.view.View
 import androidx.core.view.marginBottom

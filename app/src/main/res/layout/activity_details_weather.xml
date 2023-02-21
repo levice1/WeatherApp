@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="#0B1221"
     android:pointerIcon="zoom_in"
-    tools:context=".MainActivity" >
+    tools:context=".domen.MainActivity" >
 
     <ScrollView
         android:layout_width="match_parent"

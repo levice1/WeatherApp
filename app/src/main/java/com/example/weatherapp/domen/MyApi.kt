@@ -1,4 +1,4 @@
-package com.example.weatherapp
+package com.example.weatherapp.domen
 
 import com.example.weatherapp.json_processing.WeatherParse
 import retrofit2.Call
