@@ -19,8 +19,6 @@ class DetailsWeatherActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailsWeatherBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        Log.d("TestMsg","Start")
-        //Thread.sleep(50)
         var intentData = intent?.getSerializableExtra("responseData") as WeatherParse
         Log.d("TestMsg","End: $intentData")
         parseWeatherData(intentData)
@@ -49,19 +47,66 @@ class DetailsWeatherActivity : AppCompatActivity() {
         // weather
         binding.txtWeather.text = responceData.current.condition.text
         // additional info
-        val feelsLike = DetailDataModel(R.drawable.icon_feels_like,getString(R.string.feels_like),responceData.current.feelslike_c.toString() + getString(R.string.celsium),getString(R.string.feels_like_text))
+        // FEELS LIKE
+        val feelsLikeAddText:String
+        feelsLikeAddText = if (responceData.current.feelslike_c.toInt() == responceData.current.temp_c.toInt()){
+            getString(R.string.feels_like_text_same)
+        } else if(responceData.current.feelslike_c.toInt() < responceData.current.temp_c.toInt()){
+            getString(R.string.feels_like_text_cooler)
+        } else if (responceData.current.feelslike_c.toInt() > responceData.current.temp_c.toInt()){
+            getString(R.string.feels_like_text_warmer)
+        } else getString(R.string.feels_like_text_same)
+        val feelsLike = DetailDataModel(R.drawable.icon_feels_like,getString(R.string.feels_like),responceData.current.feelslike_c.toString() + getString(R.string.celsium),feelsLikeAddText)
         weatherDataList.add(feelsLike)
-        val windSpeed = DetailDataModel(R.drawable.icon_wind,getString(R.string.wind_speed),responceData.current.wind_kph.toString()+getString(R.string.khp),"")
+        //WIND SPEED
+        val windAddText = when(responceData.current.wind_kph.toInt()){
+            in 0..1 -> getString(R.string.wind_Calm)
+            in 1..5 -> getString(R.string.wind_LightAir)
+            in 6..11 -> getString(R.string.wind_LightBreeze)
+            in 12..19 -> getString(R.string.wind_Light)
+            in 20..28 -> getString(R.string.wind_Moderate)
+            in 29..38 -> getString(R.string.wind_FreshBreeze)
+            in 39..49 -> getString(R.string.wind_StrongBreeze)
+            in 50..74 -> getString(R.string.wind_Gale)
+            in 75..88 -> getString(R.string.wind_StrongGale)
+            in 89..117 -> getString(R.string.wind_Storm)
+            in 117..200 -> getString(R.string.wind_Hurricane)
+            else -> {""}
+        }
+        val windSpeed = DetailDataModel(R.drawable.icon_wind,getString(R.string.wind_speed),responceData.current.wind_kph.toString()+getString(R.string.khp),windAddText)
         weatherDataList.add(windSpeed)
         val humidity = DetailDataModel(R.drawable.icon_humidity,getString(R.string.humidity),responceData.current.humidity.toString() + getString(R.string.persent),"")
         weatherDataList.add(humidity)
-        val visibility = DetailDataModel(R.drawable.icon_visibility,getString(R.string.visibility),responceData.current.vis_km.toString()+getString(R.string.khp),getString(R.string.visibility_clear))
+        //VISIBILITY
+        val visAddText = when (responceData.current.vis_km.toInt()){
+            in 0..1 -> getString(R.string.visibility_high)
+            in 1..3 -> getString(R.string.visibility_middle)
+            in 3..7 -> getString(R.string.visibility_low)
+            in 7..100 -> getString(R.string.visibility_clear)
+            else -> {""}
+        }
+        val visibility = DetailDataModel(R.drawable.icon_visibility,getString(R.string.visibility),responceData.current.vis_km.toString()+getString(R.string.khp),visAddText)
         weatherDataList.add(visibility)
-        val precipitation = DetailDataModel(R.drawable.icon_precippitation,getString(R.string.precipitation),responceData.current.precip_mm.toString()+getString(R.string.mm),getString(R.string.precipitation_low))
+        // PRECIPITATION
+        val precAddText = when(responceData.current.precip_mm){
+            0.0 -> getString(R.string.precipitation_none)
+            in 0.1..1.0 -> getString(R.string.precipitation_low)
+            in 1.0..4.0 -> getString(R.string.precipitation_middle)
+            in 4.0..12.0 -> getString(R.string.precipitation_high)
+            else -> {""}
+        }
+        val precipitation = DetailDataModel(R.drawable.icon_precippitation,getString(R.string.precipitation),responceData.current.precip_mm.toString()+getString(R.string.mm),precAddText)
         weatherDataList.add(precipitation)
         val pressure = DetailDataModel(R.drawable.icon_pressure,getString(R.string.pressure),responceData.current.pressure_mb.toString()+getString(R.string.hpa),"")
         weatherDataList.add(pressure)
-        val uvIndex = DetailDataModel(R.drawable.icon_uv,getString(R.string.uv_index),responceData.current.uv.toString(),"")
+        //UV INDEX
+        val uvIndexAddText:String = when(responceData.current.uv.toInt()){
+            in 0..5 -> getString(R.string.uv_low)
+            in 5..7 -> getString(R.string.uv_middle)
+            in 7..12 ->getString(R.string.uv_high)
+            else -> {""}
+        }
+        val uvIndex = DetailDataModel(R.drawable.icon_uv,getString(R.string.uv_index),responceData.current.uv.toString(),uvIndexAddText)
         weatherDataList.add(uvIndex)
         val cloudy = DetailDataModel(R.drawable.icon_cloudy,getString(R.string.cloudy),responceData.current.cloud.toString()+getString(R.string.persent),"")
         weatherDataList.add(cloudy)
