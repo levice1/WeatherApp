@@ -12,11 +12,11 @@ import com.example.weatherapp.model.ApiKeyModel
 import com.example.weatherapp.model.DataModel
 import com.example.weatherapp.presentation.parseWeatherData
 import com.example.weatherapp.viewmodel.RequestToApi
+import com.example.weatherapp.viewmodel.ShowDetails
 
 
 class MainActivity : AppCompatActivity() {
     val visibilitySetting by lazy { VisibilitySetting(binding) }
-    lateinit var city:String
     val apiKey = ApiKeyModel().getApi()
     val apiUrl = ApiKeyModel().getUrl()
     val responseWeatherData: DataModel by viewModels()
@@ -27,26 +27,34 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        Log.d("TestMsg","App start")
-        binding.btnFindCity.setOnClickListener {  //запуск слушатєля нажатий
-            val city = binding.txtPlEntertCity.text.toString().lowercase().trim().replace(" ","+",true) // обработка текста введённого пользователем
-
-            if (city.isNotEmpty()){  // если был введён город, то запрос на сервер
-
-                visibilitySetting.setInvisibleAfterPressBtn() // спрятать кнопку и показать прогресс бар
-                Log.d("TestMsg","Before request to api")
+        //запуск слушатєля нажатий
+        binding.btnFindCity.setOnClickListener {
+            // обработка текста введённого пользователем
+            val city = binding.txtPlEntertCity.text.toString().lowercase().trim().replace(" ","+",true)
+            // если был введён город, то запрос на сервер
+            if (city.isNotEmpty()){
+                // спрятать кнопку и показать прогресс бар
+                visibilitySetting.setInvisibleAfterPressBtn()
+                // создание экземпляра класса для доступа запроса к серверу
                 val requestToApi = RequestToApi(apiUrl,city,apiKey)
+                // запрос на сервер
                 requestToApi.getData(responseWeatherData.responceWeatherData)
-                Log.d("TestMsg","After request to api")
-                responseWeatherData.responceWeatherData.observe(this@MainActivity, Observer {
-                    Log.d("TestMsg","OBSERVER WORK!")
-                    Log.d("TestMsg","$it")
-                    //parseWeatherData(it,binding, View(this)).parse()
+                // создание слушателя, который отреагирует когда придут данные
+                responseWeatherData.responceWeatherData.observe(this@MainActivity, Observer {data->
+                    // что делать когда данные получены
+                    parseWeatherData(data,binding, this).parse()
                     visibilitySetting.setVisibleAfterGetWeather()
+                    binding.btnDetails.setOnClickListener(){
+                        val showDetails = ShowDetails(data,this)
+                        showDetails.start()
+                    }
                 })
-            } else { // если ничего не было введено
-                makeText(this,"Enter the city!", LENGTH_LONG).show() // тост сообщение о необходимости ввести город
-                visibilitySetting.setInvisibleAfterGetErrCode() // спрятать прогресс бар и показать кнопку
+                // если ничего не было введено
+            } else {
+                // тост сообщение о необходимости ввести город
+                makeText(this,"Enter the city!", LENGTH_LONG).show()
+                // спрятать прогресс бар и показать кнопку
+                visibilitySetting.setInvisibleAfterGetErrCode()
             }
           }
         }
