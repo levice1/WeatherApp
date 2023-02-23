@@ -1,7 +1,7 @@
 package com.example.weatherapp.viewmodel
 
 import android.util.Log
-import androidx.lifecycle.ViewModelStore
+import androidx.activity.viewModels
 import com.example.weatherapp.model.DataModel
 import com.example.weatherapp.model.json_processing.WeatherParse
 import retrofit2.Call
@@ -10,8 +10,9 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+
 class RequestToApi(val url: String, val city: String, val key: String) {
-    private val responseWeatherData: DataModel by ViewModelStore
+    val responseWeatherData: DataModel by viewModels()
     fun getData() {
 
         val retrofit = Retrofit.Builder()
