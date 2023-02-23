@@ -1,9 +1,9 @@
-package com.example.weatherapp.domain
+package com.example.weatherapp.viewmodel
 
 import android.content.Context
 import android.content.Intent
-import com.example.weatherapp.domain.models.json_processing.WeatherParse
-import com.example.weatherapp.presentation.DetailsWeatherActivity
+import com.example.weatherapp.model.json_processing.WeatherParse
+import com.example.weatherapp.view.DetailsWeatherActivity
 
 
 

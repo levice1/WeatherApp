@@ -1,4 +1,4 @@
-package com.example.weatherapp.domain.models.json_processing
+package com.example.weatherapp.model.json_processing
 
 data class WeatherParse(
     val current: Current,

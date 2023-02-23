@@ -1,16 +1,16 @@
-package com.example.weatherapp.domain
+package com.example.weatherapp.view
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapp.databinding.DetailsItemLayoutBinding
-import com.example.weatherapp.domain.models.DetailDataModel
+import com.example.weatherapp.model.DetailRecViewDataModel
 
 class DetailsRecyclerViewAdapter : RecyclerView.Adapter<DetailsRecyclerViewAdapter.ViewHolder>() {
     inner class ViewHolder(val binding: DetailsItemLayoutBinding): RecyclerView.ViewHolder(binding.root)
 
-    private var detailsList = ArrayList<DetailDataModel>()
+    private var detailsList = ArrayList<DetailRecViewDataModel>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(DetailsItemLayoutBinding.inflate(LayoutInflater.from(parent.context),parent,false))
     }
@@ -28,7 +28,7 @@ class DetailsRecyclerViewAdapter : RecyclerView.Adapter<DetailsRecyclerViewAdapt
         }else holder.binding.txtDescriptionItem.text = detailsList[position].additionalText
     }
 
-    fun setList(list: ArrayList<DetailDataModel>) {
+    fun setList(list: ArrayList<DetailRecViewDataModel>) {
         detailsList.addAll(list)
         notifyDataSetChanged()
     }

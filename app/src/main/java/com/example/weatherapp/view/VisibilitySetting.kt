@@ -1,11 +1,11 @@
-package com.example.weatherapp.domain
+package com.example.weatherapp.view
 
 import android.view.View
 import androidx.core.view.marginBottom
 import com.example.weatherapp.databinding.ActivityMainBinding
 
 
-class VisibilitySetting(var binding: ActivityMainBinding) {
+open class VisibilitySetting(var binding: ActivityMainBinding) {
     fun setVisibleAfterGetWeather(){
         binding.currentWeatherLayout.setVisibility(View.VISIBLE)
         binding.forecastLayout.setVisibility(View.VISIBLE)
@@ -20,9 +20,5 @@ class VisibilitySetting(var binding: ActivityMainBinding) {
     fun setInvisibleAfterGetErrCode(){
         binding.btnFindCity.setVisibility(View.VISIBLE)
         binding.progressBar.setVisibility(View.INVISIBLE)
-    }
-    fun setInvisibleForStart(){
-        binding.currentWeatherLayout.setVisibility(View.INVISIBLE)
-        binding.forecastLayout.setVisibility(View.INVISIBLE)
     }
 }

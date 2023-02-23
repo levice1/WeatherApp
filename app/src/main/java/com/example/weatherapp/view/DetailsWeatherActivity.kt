@@ -1,13 +1,12 @@
-package com.example.weatherapp.presentation
+package com.example.weatherapp.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapp.R
 import com.example.weatherapp.databinding.ActivityDetailsWeatherBinding
-import com.example.weatherapp.domain.DetailsRecyclerViewAdapter
-import com.example.weatherapp.domain.models.json_processing.WeatherParse
-import com.example.weatherapp.domain.models.DetailDataModel
+import com.example.weatherapp.model.json_processing.WeatherParse
+import com.example.weatherapp.model.DetailRecViewDataModel
 
 class DetailsWeatherActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,7 +22,7 @@ class DetailsWeatherActivity : AppCompatActivity() {
     lateinit var adapter: DetailsRecyclerViewAdapter
     lateinit var recyclerView:RecyclerView
 
-    var weatherDataList = ArrayList<DetailDataModel>()
+    var weatherDataList = ArrayList<DetailRecViewDataModel>()
 
     private fun parseWeatherData(responceData: WeatherParse){
         //now
@@ -50,7 +49,7 @@ class DetailsWeatherActivity : AppCompatActivity() {
         } else if (responceData.current.feelslike_c.toInt() > responceData.current.temp_c.toInt()){
             getString(R.string.feels_like_text_warmer)
         } else getString(R.string.feels_like_text_same)
-        val feelsLike = DetailDataModel(
+        val feelsLike = DetailRecViewDataModel(
             R.drawable.icon_feels_like,getString(R.string.feels_like),responceData.current.feelslike_c.toString() + getString(
                 R.string.celsium
             ),feelsLikeAddText)
@@ -70,12 +69,12 @@ class DetailsWeatherActivity : AppCompatActivity() {
             in 117..200 -> getString(R.string.wind_Hurricane)
             else -> {""}
         }
-        val windSpeed = DetailDataModel(
+        val windSpeed = DetailRecViewDataModel(
             R.drawable.icon_wind,getString(R.string.wind_speed),responceData.current.wind_kph.toString()+getString(
                 R.string.khp
             ),windAddText)
         weatherDataList.add(windSpeed)
-        val humidity = DetailDataModel(
+        val humidity = DetailRecViewDataModel(
             R.drawable.icon_humidity,getString(R.string.humidity),responceData.current.humidity.toString() + getString(
                 R.string.persent
             ),"")
@@ -88,7 +87,7 @@ class DetailsWeatherActivity : AppCompatActivity() {
             in 7..100 -> getString(R.string.visibility_clear)
             else -> {""}
         }
-        val visibility = DetailDataModel(
+        val visibility = DetailRecViewDataModel(
             R.drawable.icon_visibility,getString(R.string.visibility),responceData.current.vis_km.toString()+getString(
                 R.string.khp
             ),visAddText)
@@ -101,12 +100,12 @@ class DetailsWeatherActivity : AppCompatActivity() {
             in 4.0..12.0 -> getString(R.string.precipitation_high)
             else -> {""}
         }
-        val precipitation = DetailDataModel(
+        val precipitation = DetailRecViewDataModel(
             R.drawable.icon_precippitation,getString(R.string.precipitation),responceData.current.precip_mm.toString()+getString(
                 R.string.mm
             ),precAddText)
         weatherDataList.add(precipitation)
-        val pressure = DetailDataModel(
+        val pressure = DetailRecViewDataModel(
             R.drawable.icon_pressure,getString(R.string.pressure),responceData.current.pressure_mb.toString()+getString(
                 R.string.hpa
             ),"")
@@ -118,9 +117,9 @@ class DetailsWeatherActivity : AppCompatActivity() {
             in 7..12 ->getString(R.string.uv_high)
             else -> {""}
         }
-        val uvIndex = DetailDataModel(R.drawable.icon_uv,getString(R.string.uv_index),responceData.current.uv.toString(),uvIndexAddText)
+        val uvIndex = DetailRecViewDataModel(R.drawable.icon_uv,getString(R.string.uv_index),responceData.current.uv.toString(),uvIndexAddText)
         weatherDataList.add(uvIndex)
-        val cloudy = DetailDataModel(
+        val cloudy = DetailRecViewDataModel(
             R.drawable.icon_cloudy,getString(R.string.cloudy),responceData.current.cloud.toString()+getString(
                 R.string.persent
             ),"")

@@ -1,6 +1,6 @@
-package com.example.weatherapp.domain
+package com.example.weatherapp.viewmodel
 
-import com.example.weatherapp.domain.models.json_processing.WeatherParse
+import com.example.weatherapp.model.json_processing.WeatherParse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query

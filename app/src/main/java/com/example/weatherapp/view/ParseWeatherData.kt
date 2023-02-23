@@ -1,12 +1,12 @@
-package com.example.weatherapp.domain
+package com.example.weatherapp.presentation
 
 import android.view.View
 import android.widget.TextView
 import com.example.weatherapp.R
 import com.example.weatherapp.databinding.ActivityMainBinding
-import com.example.weatherapp.domain.models.json_processing.WeatherParse
+import com.example.weatherapp.model.json_processing.WeatherParse
 
-class parseWeatherData(val responceData: WeatherParse, val binding: ActivityMainBinding, val view:View) {
+class parseWeatherData(val responceData: WeatherParse, val binding: ActivityMainBinding, private val view:View) {
 
     fun parse(){
 
