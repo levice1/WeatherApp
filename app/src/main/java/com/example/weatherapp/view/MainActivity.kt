@@ -2,6 +2,7 @@ package com.example.weatherapp.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast.*
 import androidx.activity.viewModels
@@ -26,18 +27,21 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        Log.d("TestMsg","App start")
         binding.btnFindCity.setOnClickListener {  //запуск слушатєля нажатий
             val city = binding.txtPlEntertCity.text.toString().lowercase().trim().replace(" ","+",true) // обработка текста введённого пользователем
 
             if (city.isNotEmpty()){  // если был введён город, то запрос на сервер
 
                 visibilitySetting.setInvisibleAfterPressBtn() // спрятать кнопку и показать прогресс бар
-
+                Log.d("TestMsg","Before request to api")
                 val requestToApi = RequestToApi(apiUrl,city,apiKey)
-                requestToApi.getData()
+                requestToApi.getData(responseWeatherData.responceWeatherData)
+                Log.d("TestMsg","After request to api")
                 responseWeatherData.responceWeatherData.observe(this@MainActivity, Observer {
-                    parseWeatherData(it,binding, View(this)).parse()
+                    Log.d("TestMsg","OBSERVER WORK!")
+                    Log.d("TestMsg","$it")
+                    //parseWeatherData(it,binding, View(this)).parse()
                     visibilitySetting.setVisibleAfterGetWeather()
                 })
             } else { // если ничего не было введено
