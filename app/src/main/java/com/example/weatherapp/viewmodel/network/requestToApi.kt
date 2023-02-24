@@ -1,10 +1,9 @@
 package com.example.weatherapp.viewmodel
 
 import android.util.Log
-import androidx.activity.viewModels
 import androidx.lifecycle.MutableLiveData
-import com.example.weatherapp.model.DataModel
 import com.example.weatherapp.model.json_processing.WeatherParse
+import com.example.weatherapp.viewmodel.network.InterfaceApi
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

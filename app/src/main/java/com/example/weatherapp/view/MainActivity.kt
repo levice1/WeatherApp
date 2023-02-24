@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import com.example.weatherapp.databinding.ActivityMainBinding
 import com.example.weatherapp.model.ApiKeyModel
 import com.example.weatherapp.model.DataModel
+import com.example.weatherapp.model.json_processing.Current
 import com.example.weatherapp.presentation.parseWeatherData
 import com.example.weatherapp.viewmodel.RequestToApi
 import com.example.weatherapp.viewmodel.ShowDetails

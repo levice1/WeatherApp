@@ -13,8 +13,8 @@ class DetailsWeatherActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailsWeatherBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        var intentData = intent?.getSerializableExtra("responseData") as WeatherParse
-        parseWeatherData(intentData)
+        val intentData = intent?.getSerializableExtra("responseData") as WeatherParse
+        parseAdditionalWeatherData(intentData)
         initRecyclerView()
     }
 
@@ -24,7 +24,7 @@ class DetailsWeatherActivity : AppCompatActivity() {
 
     var weatherDataList = ArrayList<DetailRecViewDataModel>()
 
-    private fun parseWeatherData(responceData: WeatherParse){
+    private fun parseAdditionalWeatherData(responceData: WeatherParse){
         //now
         // city name
         binding.txtCityName.text = "${responceData.location.name}, ${responceData.location.country}"

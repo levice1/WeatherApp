@@ -1,4 +1,4 @@
-package com.example.weatherapp.viewmodel
+package com.example.weatherapp.viewmodel.network
 
 import com.example.weatherapp.model.json_processing.WeatherParse
 import retrofit2.Call
