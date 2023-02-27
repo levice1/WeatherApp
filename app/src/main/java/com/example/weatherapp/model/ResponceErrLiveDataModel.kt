@@ -5,5 +5,5 @@ import androidx.lifecycle.ViewModel
 
 
 open class ResponceErrLiveDataModel: ViewModel() {
-    val FailtureErrorCode = MutableLiveData<ResponceErrParseDataModel>()
+    val failtureErrorCode = MutableLiveData<ResponceErrParseDataModel>()
 }

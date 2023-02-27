@@ -12,7 +12,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
-class RequestToApi(val url: String, val city: String, val key: String ) {
+class RequestToWeatherApi(private val url: String, private val city: String, private val key: String ) {
 
     fun getData(responseWeatherData: MutableLiveData<WeatherParse>, responceErrCode:MutableLiveData<ResponceErrParseDataModel>) {
         val retrofit = Retrofit.Builder()
