@@ -18,31 +18,35 @@ class DetailsWeatherActivity : AppCompatActivity() {
         initRecyclerView()
     }
 
-    lateinit var binding: ActivityDetailsWeatherBinding
-    lateinit var adapter: DetailsRecyclerViewAdapter
-    lateinit var recyclerView:RecyclerView
+    private lateinit var binding: ActivityDetailsWeatherBinding
+    private lateinit var adapter: DetailsRecyclerViewAdapter
+    private lateinit var recyclerView:RecyclerView
 
-    var weatherDataList = ArrayList<DetailRecViewDataModel>()
+    private var weatherDataList = ArrayList<DetailRecViewDataModel>()
 
     private fun parseAdditionalWeatherData(responceData: WeatherParse){
         //now
         // city name
-        binding.txtCityName.text = "${responceData.location.name}, ${responceData.location.country}"
+        val txtCityName = "${responceData.location.name}, ${responceData.location.country}"
+        binding.txtCityName.text = txtCityName
         // date
         val date = responceData.forecast.forecastday[0].date.split("-")
-        binding.txtDate.text = "${date[2]}.${date[1]}.${date[0]}"
+        val txtDate = "${date[2]}.${date[1]}.${date[0]}"
+        binding.txtDate.text = txtDate
         // temperatura
-        binding.txtTemperature.text = "${responceData.current.temp_c}°C"
+        val txtTemperature = "${responceData.current.temp_c}°C"
+        binding.txtTemperature.text = txtTemperature
         //min temperature now
-        binding.txtMinTemperature.text = "Min ${responceData.forecast.forecastday[0].day.mintemp_c}°C"
+        val txtMinTemperature = "Min ${responceData.forecast.forecastday[0].day.mintemp_c}°C"
+        binding.txtMinTemperature.text = txtMinTemperature
         //max temperature now
-        binding.txtMaxTemperature.text = "Max ${responceData.forecast.forecastday[0].day.maxtemp_c}°C"
+        val txtMaxTemperature = "Max ${responceData.forecast.forecastday[0].day.maxtemp_c}°C"
+        binding.txtMaxTemperature.text = txtMaxTemperature
         // weather
         binding.txtWeather.text = responceData.current.condition.text
         // additional info
         // FEELS LIKE
-        val feelsLikeAddText:String
-        feelsLikeAddText = if (responceData.current.feelslike_c.toInt() == responceData.current.temp_c.toInt()){
+        val feelsLikeAddText = if (responceData.current.feelslike_c.toInt() == responceData.current.temp_c.toInt()){
             getString(R.string.feels_like_text_same)
         } else if(responceData.current.feelslike_c.toInt() < responceData.current.temp_c.toInt()){
             getString(R.string.feels_like_text_cooler)
