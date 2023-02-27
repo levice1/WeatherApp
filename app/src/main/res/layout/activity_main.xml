@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="#0B1221"
     android:pointerIcon="zoom_in"
-    tools:context=".MainActivity">
+    tools:context=".view.MainActivity">
 
     <LinearLayout
         android:id="@+id/currentWeatherLayout"
@@ -18,10 +18,11 @@
         android:layout_marginEnd="20dp"
         android:orientation="vertical"
         android:padding="15dp"
-        android:visibility="visible"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        >
 
         <TextView
             android:id="@+id/txtCityName"
@@ -103,7 +104,7 @@
 
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="35dp"
+                android:layout_width="0dp"
                 android:layout_height="35dp"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/icon_details" />
@@ -119,22 +120,24 @@
                 android:background="#0048515E"
                 android:clickable="false"
                 android:text="@string/more_info_btn"
-                android:textSize="10sp"
+                android:textSize="11sp"
                 android:visibility="visible" />
         </LinearLayout>
 
     </LinearLayout>
 
     <HorizontalScrollView
+        android:id="@+id/forecastLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:scrollbars="none"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:scrollbars="none"
-        app:layout_constraintTop_toBottomOf="@+id/currentWeatherLayout">
+        app:layout_constraintTop_toBottomOf="@+id/currentWeatherLayout"
+        tools:visibility="invisible">
 
         <LinearLayout
-            android:id="@+id/forecastLayout"
+            android:id="@+id/forecastLayoutInner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
@@ -144,8 +147,7 @@
             android:paddingEnd="25dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/currentWeatherLayout"
-            tools:ignore="ExtraText,VisualLintBounds">
+            app:layout_constraintTop_toBottomOf="@+id/currentWeatherLayout">
 
             <LinearLayout
                 android:id="@+id/secondDay"
@@ -389,18 +391,5 @@
         app:layout_constraintEnd_toEndOf="@+id/btnFindCity"
         app:layout_constraintStart_toStartOf="@+id/btnFindCity"
         app:layout_constraintTop_toTopOf="@+id/btnFindCity" />
-
-    <TextView
-        android:id="@+id/txtDataItem"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="1000dp"
-        android:gravity="center"
-        android:text="@string/feels_like"
-        android:textSize="20sp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="0dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

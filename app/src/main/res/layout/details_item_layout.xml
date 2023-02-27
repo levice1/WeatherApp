@@ -59,7 +59,7 @@
                 android:id="@+id/txtDescriptionItem"
                 android:layout_width="158dp"
                 android:layout_height="56dp"
-                android:text="@string/feels_like_text"
+                android:text="@string/feels_like_text_same"
                 android:textAlignment="center"
                 tools:visibility="visible" />
         </LinearLayout>
