@@ -10,7 +10,7 @@ import com.example.weatherapp.model.ApiKeyModel
 import com.example.weatherapp.model.ResponceErrLiveDataModel
 import com.example.weatherapp.model.ResponceLiveDataModel
 import com.example.weatherapp.presentation.parseWeatherData
-import com.example.weatherapp.viewmodel.RequestToApi
+import com.example.weatherapp.viewmodel.RequestToWeatherApi
 import com.example.weatherapp.viewmodel.ShowDetails
 
 
@@ -37,27 +37,27 @@ class MainActivity : AppCompatActivity() {
                 // спрятать кнопку и показать прогресс бар
                 visibilitySetting.setInvisibleAfterPressBtn()
                 // создание экземпляра класса для доступа запроса к серверу
-                val requestToApi = RequestToApi(apiUrl,city,apiKey)
+                val requestToWeatherApi = RequestToWeatherApi(apiUrl,city,apiKey)
                 // запрос на сервер
-                requestToApi.getData(responseLiveWeatherData.responceWeatherData,responseErrorWeatherData.FailtureErrorCode)
+                requestToWeatherApi.getData(responseLiveWeatherData.responceWeatherData,responseErrorWeatherData.failtureErrorCode)
                 // создание слушателя, который отреагирует когда придут данные
                 // код 400,401,403 (неудача)
-                responseErrorWeatherData.FailtureErrorCode.observe(this@MainActivity) {
+                responseErrorWeatherData.failtureErrorCode.observe(this@MainActivity) {
                     //ОБРАБОТКА ОШИБКИ
                     makeText(this,"Error: ${it.code}, ${it.message}", LENGTH_SHORT).show()
                     visibilitySetting.setInvisibleAfterGetErrCode()
                 }
                 // код 200 (успех)
-                responseLiveWeatherData.responceWeatherData.observe(this@MainActivity, Observer {inputData->
+                responseLiveWeatherData.responceWeatherData.observe(this@MainActivity) { inputData ->
                     // что делать когда данные получены
-                    parseWeatherData(inputData,binding, this).parse()
+                    parseWeatherData(inputData, binding, this).parse()
                     visibilitySetting.setVisibleAfterGetWeather()
                     // слушатель нажатий для перехода на новое активити
                     binding.btnDetails.setOnClickListener {
-                        val showDetails = ShowDetails(inputData,this)
+                        val showDetails = ShowDetails(inputData, this)
                         showDetails.start()
                     }
-                })
+                }
                 // если ничего не было введено
             } else {
                 // тост сообщение о необходимости ввести город
