@@ -1,17 +1,59 @@
-package com.example.weatherapp.presentation
+package com.example.weatherapp.view
 
 import android.app.Activity
-import android.content.Context
+import android.os.Bundle
 import android.util.Log
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
+import androidx.fragment.app.activityViewModels
 import com.example.weatherapp.R
-import com.example.weatherapp.databinding.ActivityMainBinding
-import com.example.weatherapp.model.json_processing.WeatherParse
+import com.example.weatherapp.databinding.FragmentMainWeatherInfoBinding
+import com.example.weatherapp.model.ResponceForFragsDataModel
+import com.example.weatherapp.model.json_processing.JsonWeatherParse
+import com.squareup.picasso.Picasso
 
-class parseWeatherData(private val responceData: WeatherParse, private val binding: ActivityMainBinding, private val context:Context) {
-    fun parse(){
-        Log.d("TestMsg","PARSE START ")
+class MainWeatherInfoFragment : Fragment() {
+
+lateinit var binding: FragmentMainWeatherInfoBinding
+private val responceForFragsDataModel: ResponceForFragsDataModel by activityViewModels()
+
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?): View {
+        binding = FragmentMainWeatherInfoBinding.inflate(inflater)
+        return binding.root
+    }
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        responceForFragsDataModel.data.observe(this@MainWeatherInfoFragment) {
+            parseMainWeatherData(it)
+        }
+
+    }
+
+
+    companion object {
+        @JvmStatic
+        fun newInstance() = MainWeatherInfoFragment()
+    }
+
+
+    fun parseMainWeatherData(responceData: JsonWeatherParse) {
+
+        fun getImg(url:String,imgView:ImageView) {
+            Picasso.get()
+                .load("https:$url") // ссылка на изображение
+                .placeholder(R.drawable.weather_icon) // идентификатор ресурса для заглушки
+                .resize(150, 150) // размер
+                .into(imgView) // куда
+        }
         binding.txtCityName.text = "${responceData.location.name}, ${responceData.location.country}"
         // temperatura
         //now
@@ -85,6 +127,16 @@ class parseWeatherData(private val responceData: WeatherParse, private val bindi
         val date6Day = responceData.forecast.forecastday[5].date.split("-")
         val txtDate6DayId = (context as Activity).findViewById<TextView>(R.id.txt6DayLabel)
         txtDate6DayId.text = "${date6Day[2]}-${date6Day[1]}"
-
+        //icon
+        //2day
+        getImg(responceData.forecast.forecastday[1].day.condition.icon,binding.img2Day)
+        //3day
+        getImg(responceData.forecast.forecastday[2].day.condition.icon,binding.img3Day)
+        //4day
+        getImg(responceData.forecast.forecastday[3].day.condition.icon,binding.img4Day)
+        //5day
+        getImg(responceData.forecast.forecastday[4].day.condition.icon,binding.img5Day)
+        //6day
+        getImg(responceData.forecast.forecastday[5].day.condition.icon,binding.img6Day)
     }
 }
