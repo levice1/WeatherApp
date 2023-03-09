@@ -16,7 +16,7 @@ import com.example.weatherapp.model.json_processing.JsonWeatherParse
 
 class DetailsWeatherInfoFragment : Fragment() {
 
-    lateinit var binding: FragmentDetailsWeatherInfoBinding
+    private lateinit var binding: FragmentDetailsWeatherInfoBinding
 
     private lateinit var adapter: DetailsRecyclerViewAdapter
     private lateinit var recyclerView: RecyclerView
@@ -28,7 +28,7 @@ class DetailsWeatherInfoFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle? ): View? {
+        savedInstanceState: Bundle? ): View {
         binding = FragmentDetailsWeatherInfoBinding.inflate(inflater)
         return binding.root
     }

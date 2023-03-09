@@ -72,7 +72,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="VisualLintTextFieldSize" />
 
         <Button
             android:id="@+id/btnFindCity"
@@ -85,7 +86,7 @@
             android:shadowDx="7"
             android:shadowDy="5"
             android:shadowRadius="6"
-            android:text="Get"
+            android:text="@string/get"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"

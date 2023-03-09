@@ -1,16 +1,11 @@
 package com.example.weatherapp.view
 
-import android.app.Activity
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast.*
 import androidx.activity.viewModels
-import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import com.example.weatherapp.R
 import com.example.weatherapp.databinding.ActivityMainBinding
@@ -18,6 +13,7 @@ import com.example.weatherapp.model.ApiKeyModel
 import com.example.weatherapp.model.ResponceForFragsDataModel
 import com.example.weatherapp.model.ResponceErrLiveDataModel
 import com.example.weatherapp.model.ResponceLiveDataModel
+import com.example.weatherapp.viewmodel.network.SendErrToTelegram
 import com.example.weatherapp.viewmodel.RequestToWeatherApi
 
 
@@ -63,9 +59,10 @@ class MainActivity : AppCompatActivity() {
                 // код 400,401,403 (неудача)
                 responseErrorWeatherData.failtureErrorCode.observe(this@MainActivity) { errData ->
                     //ОБРАБОТКА ОШИБКИ
-                    makeText(
-                        this, "Error: ${errData.code}, ${errData.message}", LENGTH_SHORT
-                    ).show()
+                    // отправка сообзения в ТГ если проблема с API ключем
+                    if (errData.code == 401 || errData.code == 403) SendErrToTelegram().sendMessage("WEATHER APP: ${errData.message}")
+                    // вывод сообщения об ошибке
+                    makeText(this, "Error: ${errData.code}, ${errData.message}", LENGTH_SHORT).show()
                     visibilitySetting.setVisibleAfterGetError()
                 }
                 // код 200 (успех)

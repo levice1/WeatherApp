@@ -36,5 +36,4 @@ class RequestToWeatherApi(private val url: String, private val city: String, pri
             }
         })
     }
-
 }
