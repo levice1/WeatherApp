@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
-    <shape
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:shape="oval">
+    <shape android:shape="oval">
         <solid android:color="#102746"/>
         <corners android:radius="50dp"/>
-        <corners android:radius="22sp"></corners>
+        <corners android:radius="22sp"/>
         <gradient
             android:type="linear"
             android:startColor="#CC9A04"

@@ -1,6 +1,6 @@
 package com.example.weatherapp.model.json_processing
 
-data class WeatherParse(
+data class JsonWeatherParse(
     val current: Current,
     val forecast: Forecast,
     val location: Location
