@@ -4,7 +4,7 @@ package com.example.weatherapp
 //import com.example.weatherapp.model.ApiKeyModel
 //import com.example.weatherapp.model.ResponceErrDataModel
 //import com.example.weatherapp.model.json_processing.JsonWeatherParse
-//import com.example.weatherapp.viewmodel.RequestToWeatherApi
+//import com.example.weatherapp.viewmodel.network.RequestToWeatherApi
 //import org.junit.Test
 //
 //import org.junit.Assert.*
