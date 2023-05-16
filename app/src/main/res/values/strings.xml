@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">WeatherApp</string>
     <string name="get_weather_btn">Get</string>
-    <string name="more_info_btn">More details...</string>
-    <string name="celsium">°C</string>
+    <string name="details">Details</string>
+    <string name="celsium">" °C"</string>
     <string name="khp"> Khp</string>
     <string name="persent"> %</string>
     <string name="mm"> mm</string>
@@ -50,6 +50,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="get">Get</string>
+    <string name="img_weather">img_weather</string>
 
 
 </resources>
