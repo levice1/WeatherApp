@@ -1,9 +1,8 @@
-package com.example.weatherapp.viewmodel
+package com.example.weatherapp.viewmodel.network
 
 import androidx.lifecycle.MutableLiveData
 import com.example.weatherapp.model.ResponceErrDataModel
 import com.example.weatherapp.model.json_processing.JsonWeatherParse
-import com.example.weatherapp.viewmodel.network.InterfaceApi
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
@@ -24,7 +23,7 @@ class RequestToWeatherApi(private val url: String, private val city: String, pri
 
             override fun onResponse(call: Call<JsonWeatherParse>, response: Response<JsonWeatherParse>) {
                 // обработка положительного результата от сервера
-                if(response.code()==200) responseWeatherData.postValue(response.body())
+                if(response.code() == 200) responseWeatherData.postValue(response.body())
                 // обработка ошибки от сервера
                 else responceErrCode.postValue(ResponceErrDataModel
                     (response.code(),JSONObject(response.errorBody()!!.string())

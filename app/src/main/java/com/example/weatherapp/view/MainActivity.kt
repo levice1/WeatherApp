@@ -14,7 +14,7 @@ import com.example.weatherapp.model.ResponceForFragsDataModel
 import com.example.weatherapp.model.ResponceErrLiveDataModel
 import com.example.weatherapp.model.ResponceLiveDataModel
 import com.example.weatherapp.viewmodel.network.SendErrToTelegram
-import com.example.weatherapp.viewmodel.RequestToWeatherApi
+import com.example.weatherapp.viewmodel.network.RequestToWeatherApi
 
 
 class MainActivity : AppCompatActivity() {
@@ -45,7 +45,11 @@ class MainActivity : AppCompatActivity() {
             visibilitySetting.setInvisibleAfterPressBtn()
             // обработка текста введённого пользователем
             val city =
-                binding.txtPlEntertCity.text.toString().lowercase().trim().replace(" ", "+", true)
+                binding.txtPlEntertCity.text
+                    .toString()
+                    .lowercase()
+                    .trim()
+                    .replace(" ", "+", true)
             // если был введён город, то запрос на сервер
             if (city.isNotEmpty()) {
                 // создание экземпляра класса для доступа запроса к серверу
@@ -57,7 +61,9 @@ class MainActivity : AppCompatActivity() {
                 )
                 // создание слушателя, который отреагирует когда придут данные
                 // код 400,401,403 (неудача)
-                responseErrorWeatherData.failtureErrorCode.observe(this@MainActivity) { errData ->
+                responseErrorWeatherData.failtureErrorCode
+                    .observe(this@MainActivity) {
+                            errData ->
                     //ОБРАБОТКА ОШИБКИ
                     // отправка сообзения в ТГ если проблема с API ключем
                     if (errData.code == 401 || errData.code == 403) SendErrToTelegram().sendMessage("WEATHER APP: ${errData.message}")
@@ -66,10 +72,20 @@ class MainActivity : AppCompatActivity() {
                     visibilitySetting.setVisibleAfterGetError()
                 }
                 // код 200 (успех)
-                responseLiveWeatherData.responceWeatherData.observe(this@MainActivity) { inputData ->
+                responseLiveWeatherData.responceWeatherData
+                    .observe(this@MainActivity) {
+                            inputData ->
                     // что делать когда данные получены
-                    initFragment(R.id.MainFrameLayout, MainWeatherInfoFragment.newInstance())
-                    initFragment(R.id.DetailsFrameLayout, DetailsWeatherInfoFragment.newInstance())
+                    initFragment(
+                        R.id.MainFrameLayout,
+                        MainWeatherInfoFragment
+                            .newInstance()
+                    )
+                    initFragment(
+                        R.id.DetailsFrameLayout,
+                        DetailsWeatherInfoFragment
+                            .newInstance()
+                    )
                     weatherDataForFrags.data.value = inputData
                     visibilitySetting.setVisibleAfterGetWeather()
                 }
@@ -83,7 +99,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun initFragment(idFrameLayout: Int, fragment: Fragment) {
+    private fun initFragment(idFrameLayout: Int, fragment: Fragment) {
         supportFragmentManager.beginTransaction().replace(idFrameLayout, fragment).commit()
     }
 }

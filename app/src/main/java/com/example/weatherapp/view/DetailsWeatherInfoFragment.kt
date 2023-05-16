@@ -23,7 +23,7 @@ class DetailsWeatherInfoFragment : Fragment() {
 
     private var weatherDataList = ArrayList<DetailRecViewDataModel>()
 
-    private val responceForFragsDataModel: ResponceForFragsDataModel by activityViewModels()
+    private val responseForFragsDataModel: ResponceForFragsDataModel by activityViewModels()
 
 
     override fun onCreateView(
@@ -36,7 +36,7 @@ class DetailsWeatherInfoFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        responceForFragsDataModel.data.observe(this@DetailsWeatherInfoFragment) {
+        responseForFragsDataModel.data.observe(this@DetailsWeatherInfoFragment) {
             parseAdditionalWeatherData(it)
             initRecyclerView()
         }
@@ -53,9 +53,7 @@ class DetailsWeatherInfoFragment : Fragment() {
     private fun parseAdditionalWeatherData(responceData: JsonWeatherParse) {
         // FEELS LIKE
         val feelsLikeAddText =
-            if (responceData.current.feelslike_c.toInt() == responceData.current.temp_c.toInt()) {
-                getString(R.string.feels_like_text_same)
-            } else if (responceData.current.feelslike_c.toInt() < responceData.current.temp_c.toInt()) {
+            if (responceData.current.feelslike_c.toInt() < responceData.current.temp_c.toInt()) {
                 getString(R.string.feels_like_text_cooler)
             } else if (responceData.current.feelslike_c.toInt() > responceData.current.temp_c.toInt()) {
                 getString(R.string.feels_like_text_warmer)
