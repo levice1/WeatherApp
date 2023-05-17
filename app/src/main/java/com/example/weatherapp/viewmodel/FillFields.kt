@@ -1,4 +1,4 @@
-package com.example.weatherapp.view
+package com.example.weatherapp.viewmodel
 
 import android.annotation.SuppressLint
 import android.view.View
@@ -6,8 +6,6 @@ import com.example.weatherapp.databinding.FragmentDetailsWeatherInfoBinding
 import com.example.weatherapp.databinding.FragmentMainWeatherInfoBinding
 import com.example.weatherapp.model.DetailListModel
 import com.example.weatherapp.model.json_processing.JsonWeatherParse
-
-class FillFields {
 
     fun fillDetailsSection(items: DetailListModel, binding: FragmentDetailsWeatherInfoBinding){
         // FEELS LIKE
@@ -80,17 +78,14 @@ class FillFields {
         // city name
         binding.txtCityName.text = "${responceData.location.name}, ${responceData.location.country}"
         // temperature
-        binding.txtTemperature.text = "${responceData.current.temp_c}°C"
+        binding.txtTemperature.text = "${responceData.current.temp_c}°"
         //min temperature now
-        binding.txtMinTemperature.text = "Min ${responceData.forecast.forecastday[0].day.mintemp_c}°C"
+        binding.txtMinTemperature.text = "Min ${responceData.forecast.forecastday[0].day.mintemp_c}°"
         //max temperature now
-        binding.txtMaxTemperature.text = "Max ${responceData.forecast.forecastday[0].day.maxtemp_c}°C"
+        binding.txtMaxTemperature.text = "Max ${responceData.forecast.forecastday[0].day.maxtemp_c}°"
         // weather
         binding.txtWeather.text = responceData.current.condition.text
         // date
         val date = responceData.forecast.forecastday[0].date.split("-")
         binding.txtDateNow.text = "${date[2]}.${date[1]}.${date[0]}"
     }
-
-
-}

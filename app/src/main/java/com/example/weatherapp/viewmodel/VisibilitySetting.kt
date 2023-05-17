@@ -1,4 +1,4 @@
-package com.example.weatherapp.view
+package com.example.weatherapp.viewmodel
 
 import android.animation.ValueAnimator
 import android.graphics.Rect

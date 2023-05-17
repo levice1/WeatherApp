@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
             android:orientation="vertical"
             android:padding="15dp"
@@ -29,6 +29,7 @@
                 android:id="@+id/txtCityName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
                 android:gravity="center"
                 android:text="@string/city_name"
                 android:textSize="30sp"
@@ -38,6 +39,7 @@
                 android:id="@+id/txtDateNow"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
                 android:gravity="center"
                 android:text="@string/date"
                 android:textSize="18sp"
@@ -48,7 +50,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
-                android:layout_marginTop="35dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="sans-serif-light"
                 android:gravity="center"
                 android:text="@string/temp"
                 android:textSize="70sp"
@@ -58,7 +61,7 @@
                 android:id="@+id/txtWeather"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="35dp"
+                android:layout_marginTop="20dp"
                 android:gravity="center"
                 android:text="@string/weather"
                 android:textSize="40sp"
@@ -68,7 +71,7 @@
                 android:id="@+id/min_max_temp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="35dp"
+                android:layout_marginTop="20dp"
                 android:gravity="center_horizontal">
 
                 <TextView
@@ -76,6 +79,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="30dp"
+                    android:fontFamily="sans-serif-light"
                     android:gravity="center"
                     android:text="@string/temp_min"
                     android:visibility="visible" />
@@ -85,6 +89,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="30dp"
+                    android:fontFamily="sans-serif-light"
                     android:gravity="center"
                     android:text="@string/temp_max"
                     android:visibility="visible" />
@@ -98,16 +103,28 @@
             android:id="@+id/forecastWeather"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
             android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/txtMinTemperature2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:fontFamily="sans-serif-light"
+                android:gravity="center"
+                android:text="@string/hourly"
+                android:textSize="16sp"
+                android:visibility="visible" />
+
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/forecastRecView"
+                android:id="@+id/hourlyRecView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:itemCount="6"
-                tools:listitem="@layout/forecast_item_rec_view" />
+                tools:listitem="@layout/hourly_item_rec_view" />
         </LinearLayout>
 
     </LinearLayout>

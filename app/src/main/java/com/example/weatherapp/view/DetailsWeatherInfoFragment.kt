@@ -9,6 +9,7 @@ import androidx.fragment.app.activityViewModels
 import com.example.weatherapp.databinding.FragmentDetailsWeatherInfoBinding
 import com.example.weatherapp.model.ResponceForFragsDataModel
 import com.example.weatherapp.viewmodel.ParseDetailWeatherData
+import com.example.weatherapp.viewmodel.fillDetailsSection
 
 
 class DetailsWeatherInfoFragment : Fragment() {
@@ -30,17 +31,14 @@ class DetailsWeatherInfoFragment : Fragment() {
         super.onCreate(savedInstanceState)
         responseForFragsDataModel.data.observe(this@DetailsWeatherInfoFragment) {
             val detailsItems = ParseDetailWeatherData().getDetails(it, this@DetailsWeatherInfoFragment.requireContext())
-           FillFields().fillDetailsSection(detailsItems, binding)
+           fillDetailsSection(detailsItems, binding)
         }
 
     }
 
 
-    companion object {
-        @JvmStatic
-        fun newInstance() = DetailsWeatherInfoFragment()
-    }
-
-
-
+//    companion object {
+//        @JvmStatic
+//        fun newInstance() = DetailsWeatherInfoFragment()
+//    }
 }
