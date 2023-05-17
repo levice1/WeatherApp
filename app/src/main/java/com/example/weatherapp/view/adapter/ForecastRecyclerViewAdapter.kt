@@ -1,14 +1,12 @@
-package com.example.weatherapp.view
+package com.example.weatherapp.view.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.weatherapp.R
 import com.example.weatherapp.databinding.ForecastItemRecViewBinding
 import com.example.weatherapp.model.json_processing.Forecastday
-import com.squareup.picasso.Picasso
+import com.example.weatherapp.viewmodel.network.getImgFromUrl
 
 class ForecastRecyclerViewAdapter : RecyclerView.Adapter<ForecastRecyclerViewAdapter.ViewHolder>() {
 
@@ -32,22 +30,17 @@ class ForecastRecyclerViewAdapter : RecyclerView.Adapter<ForecastRecyclerViewAda
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val date = detailsList[position].date.split("-")
         holder.binding.txtDate.text = "${date[2]}.${date[1]}"
-        holder.binding.txtDayTemperature.text = detailsList[position].day.avgtemp_c.toString()
+        holder.binding.txtDayMaxTemperature.text = detailsList[position].day.maxtemp_c.toInt().toString()
+        holder.binding.txtDayMinTemperature.text = detailsList[position].day.mintemp_c.toInt().toString()
         holder.binding.txtDayWeather.text = detailsList[position].day.condition.text
-        getImg(
+        getImgFromUrl(
             detailsList[position].day.condition.icon,
             holder.binding.imgDay
         )
     }
 
 
-    private fun getImg(url:String, imgView: ImageView) {
-        Picasso.get()
-            .load("https:$url") // ссылка на изображение
-            .placeholder(R.drawable.weather_icon) // идентификатор ресурса для заглушки
-            .resize(150, 150) // размер
-            .into(imgView) // куда
-    }
+
 
 
     fun setList(list: List<Forecastday>) {

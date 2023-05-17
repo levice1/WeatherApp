@@ -6,12 +6,10 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.IOException
 
 
-class SendErrToTelegram {
-    private val botToken = "6211255792:AAHLQAGYhaXo_pgvGMoAKPLQkW7GzdN_ZWw"
-    private val chatId = 278008469
+    fun sendMessageToTG(message: String) {
+        val botToken = "6211255792:AAHLQAGYhaXo_pgvGMoAKPLQkW7GzdN_ZWw"
+        val chatId = 278008469
 
-
-    fun sendMessage(message: String) {
         val url = "https://api.telegram.org/bot$botToken/sendMessage"
         val json = "{\"chat_id\":$chatId,\"text\":\"$message\"}"
         val body = json.toRequestBody("application/json; charset=utf-8".toMediaTypeOrNull())
@@ -31,5 +29,3 @@ class SendErrToTelegram {
             }
         })
     }
-
-}

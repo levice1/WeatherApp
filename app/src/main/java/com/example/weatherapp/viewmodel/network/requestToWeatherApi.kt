@@ -19,7 +19,7 @@ class RequestToWeatherApi(private val url: String, private val city: String, pri
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         val interfaceApi = retrofit.create(InterfaceApi::class.java)
-        interfaceApi.getData(key, city, 6).enqueue(object : Callback<JsonWeatherParse> {
+        interfaceApi.getData(key, city, 10).enqueue(object : Callback<JsonWeatherParse> {
 
             override fun onResponse(call: Call<JsonWeatherParse>, response: Response<JsonWeatherParse>) {
                 // обработка положительного результата от сервера
