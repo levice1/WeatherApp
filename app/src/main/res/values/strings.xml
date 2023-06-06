@@ -5,6 +5,7 @@
     <string name="celsium">°</string>
     <string name="khp"> Khp</string>
     <string name="persent"> %</string>
+    <string name="days_weather"> Day Weather</string>
     <string name="line">/</string>
     <string name="mm"> mm</string>
     <string name="hpa"> hPa</string>
@@ -21,7 +22,7 @@
     <string name="uv_low">Moderate level, you can walk freely in the open sun</string>
     <string name="uv_middle">Medium level, limit time in the sun</string>
     <string name="uv_high">High level, not recommended to go outside</string>
-    <string name="enter_city_label">Enter city...</string>
+    <string name="enter_city_label">Enter city…</string>
     <string name="feels_like">Feels like</string>
     <string name="feels_like_text_same">It feels like a real temperature</string>
     <string name="feels_like_text_cooler">The wind makes the weather seem cooler</string>

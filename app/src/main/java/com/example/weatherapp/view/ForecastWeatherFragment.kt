@@ -37,12 +37,6 @@ class ForecastWeatherFragment : Fragment() {
     }
 
 
-//    companion object {
-//        @JvmStatic
-//        fun newInstance() = MainWeatherInfoFragment()
-//    }
-
-
     private fun initForecastRecyclerView(list: List<Forecastday>) {
         recyclerView = binding.forecastRecView
         adapter = ForecastRecyclerViewAdapter()
