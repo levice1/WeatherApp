@@ -37,8 +37,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val visibilitySetting = VisibilitySetting(binding)
-        // TABS
-        initTabs()
         //запуск слушатєля нажатий
         binding.btnFindCity.setOnClickListener {
             // скрыть клавиатуру
@@ -73,6 +71,7 @@ class MainActivity : AppCompatActivity() {
                     .observe(this@MainActivity) {
                             inputData ->
                             // что делать когда данные получены
+                        initTabs(inputData.forecast.forecastday.size)
                             initFragment(
                                 R.id.MainFrameLayout,
                                 MainWeatherInfoFragment.newInstance()
@@ -94,10 +93,10 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction().replace(idFrameLayout, fragment).commit()
     }
 
-    private fun initTabs(){
+    private fun initTabs(days:Int){
         val adapter = TabsAdapter(supportFragmentManager, lifecycle)
-        adapter.addFragment(DetailsWeatherInfoFragment(), "Details")
-        adapter.addFragment(ForecastWeatherFragment(), "10 Day Weather")
+        adapter.addFragment(DetailsWeatherInfoFragment(), this.getString(R.string.details))
+        adapter.addFragment(ForecastWeatherFragment(), "$days ${this.getString(R.string.days_weather)}")
         binding.viewPager.adapter = adapter
         TabLayoutMediator(binding.tabs, binding.viewPager) { tab, position ->
             tab.text = adapter.titleList[position]
