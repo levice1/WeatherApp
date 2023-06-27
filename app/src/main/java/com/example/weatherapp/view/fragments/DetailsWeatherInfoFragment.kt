@@ -1,4 +1,4 @@
-package com.example.weatherapp.view
+package com.example.weatherapp.view.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,13 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import com.example.weatherapp.databinding.FragmentDetailsWeatherInfoBinding
+import com.example.weatherapp.view.util.fillFieldsInDetailsFragment
+import com.example.weatherapp.view_model.WeatherViewModel
 
 
 class DetailsWeatherInfoFragment : Fragment() {
 
     private lateinit var binding: FragmentDetailsWeatherInfoBinding
 
-    private val responseForFragsDataModel: ResponceForFragsDataModel by activityViewModels()
+    private val viewModel: WeatherViewModel by activityViewModels()
 
 
     override fun onCreateView(
@@ -23,19 +25,10 @@ class DetailsWeatherInfoFragment : Fragment() {
         return binding.root
     }
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        responseForFragsDataModel.data.observe(this@DetailsWeatherInfoFragment) {
-            val detailsItems = ParseDetailWeatherData().getDetails(it, this@DetailsWeatherInfoFragment.requireContext())
-           fillDetailsSection(detailsItems, binding)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel.weatherDataByCity.observe(viewLifecycleOwner) {
+            fillFieldsInDetailsFragment(it.details, binding)
         }
-
     }
-
-
-//    companion object {
-//        @JvmStatic
-//        fun newInstance() = DetailsWeatherInfoFragment()
-//    }
 }

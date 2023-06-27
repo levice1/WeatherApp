@@ -6,7 +6,6 @@ import com.example.weatherapp.data.util.ApiKeyModel
 import com.example.weatherapp.model.ErrorDataModel
 import com.example.weatherapp.model.InputJsonModel
 import com.example.weatherapp.model.ResponceModel
-import com.example.weatherapp.model.data.api_weather.InterfaceApi
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
@@ -21,30 +20,25 @@ class QueryToWeatherApi(private val city: String) {
     private val interfaceApi = retrofit.create(InterfaceApi::class.java)
     val answerFromServer = MutableLiveData<ResponceModel>()
     fun getData() {
-
-        interfaceApi.getData(key, city, daysCount).enqueue(object : Callback<InputJsonModel> {
+        interfaceApi.getData(key, city, daysCount).enqueue( object : Callback<InputJsonModel> {
 
             override fun onResponse(
                 call: Call<InputJsonModel>,
                 response: Response<InputJsonModel>
             ) {
-                // обработка положительного результата от сервера
                 if (response.code() == 200) {
                     answerFromServer.value = ResponceModel.Data(response.body())
-                    // обработка ошибки от сервера
                 } else {
                     answerFromServer.value = ResponceModel.Error(
                         ErrorDataModel(
                             response.code(),
-                            JSONObject(response.errorBody()!!.string())
-                                .getJSONObject("error").getString("message")
+                            JSONObject(response.errorBody()!!.string()).getJSONObject("error").getString("message")
                         )
                     )
                 }
             }
 
             override fun onFailure(call: Call<InputJsonModel>, t: Throwable) {
-                // обработка ошибки соединения
                 answerFromServer.value = ResponceModel.Error(
                     ErrorDataModel(409, "NO INTERNET CONNECTION")
                 )

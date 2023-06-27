@@ -1,6 +1,5 @@
 package com.example.weatherapp.model
 
-import androidx.lifecycle.MutableLiveData
 
 
 sealed class ResponceModel{

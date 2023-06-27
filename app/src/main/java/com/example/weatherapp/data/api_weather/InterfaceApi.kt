@@ -1,4 +1,4 @@
-package com.example.weatherapp.model.data.api_weather
+package com.example.weatherapp.data.api_weather
 
 import com.example.weatherapp.model.InputJsonModel
 import retrofit2.Call

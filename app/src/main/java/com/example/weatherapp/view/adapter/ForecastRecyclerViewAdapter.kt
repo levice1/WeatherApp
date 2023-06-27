@@ -6,12 +6,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapp.databinding.ForecastItemRecViewBinding
 import com.example.weatherapp.model.Forecastday
-import com.example.weatherapp.network.getImgFromUrl
+import com.example.weatherapp.view.util.downloadImgFromUrl
 
 class ForecastRecyclerViewAdapter : RecyclerView.Adapter<ForecastRecyclerViewAdapter.ViewHolder>() {
-
     inner class ViewHolder(val binding: ForecastItemRecViewBinding): RecyclerView.ViewHolder(binding.root)
-
 
     private var detailsList = ArrayList<Forecastday>()
 
@@ -33,16 +31,14 @@ class ForecastRecyclerViewAdapter : RecyclerView.Adapter<ForecastRecyclerViewAda
         holder.binding.txtDayMaxTemperature.text = detailsList[position].day.maxtemp_c.toInt().toString()
         holder.binding.txtDayMinTemperature.text = detailsList[position].day.mintemp_c.toInt().toString()
         holder.binding.txtDayWeather.text = detailsList[position].day.condition.text
-        getImgFromUrl(
+        downloadImgFromUrl(
             detailsList[position].day.condition.icon,
             holder.binding.imgDay
         )
     }
 
 
-
-
-
+    @SuppressLint("NotifyDataSetChanged")
     fun setList(list: List<Forecastday>) {
         detailsList.addAll(list)
         notifyDataSetChanged()

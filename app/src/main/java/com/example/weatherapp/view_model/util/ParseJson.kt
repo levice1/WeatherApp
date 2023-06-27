@@ -13,7 +13,7 @@ class ParseJson(val data: InputJsonModel) {
 
     private fun getMainData(): MainWeatherData {
         val tempDate = data.forecast.forecastday[0].date.split("-")
-        val date: String = "${tempDate[2]}.${tempDate[1]}.${tempDate[0]}"
+        val date = "${tempDate[2]}.${tempDate[1]}.${tempDate[0]}"
         return MainWeatherData(
             city = data.location.name,
             country = data.location.country,
@@ -93,7 +93,7 @@ class ParseJson(val data: InputJsonModel) {
             visAddText
         )
         // PRECIPITATION
-        val precAddText = when (data.current.precip_mm) {
+        val precipitationAddText = when (data.current.precip_mm) {
             0.0 -> context.getString(R.string.precipitation_none)
             in 0.1..1.0 -> context.getString(R.string.precipitation_low)
             in 1.0..4.0 -> context.getString(R.string.precipitation_middle)
@@ -108,7 +108,7 @@ class ParseJson(val data: InputJsonModel) {
             data.current.precip_mm.toString() + context.getString(
                 R.string.mm
             ),
-            precAddText
+            precipitationAddText
         )
         val pressure = DetailWeatherDataModel(
             R.drawable.icon_pressure,

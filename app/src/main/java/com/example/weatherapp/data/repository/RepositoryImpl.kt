@@ -7,10 +7,9 @@ import com.example.weatherapp.view_model.repository.Repository
 
 class RepositoryImpl: Repository {
 
-    override suspend fun getWeather(city: String): MutableLiveData<ResponceModel> {
+    override fun getWeather(city: String): MutableLiveData<ResponceModel> {
         val query = QueryToWeatherApi(city)
         query.getData()
         return query.answerFromServer
     }
-
 }
