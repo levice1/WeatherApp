@@ -8,8 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapp.databinding.FragmentForecastWeatherBinding
-import com.example.weatherapp.model.ResponceForFragsDataModel
-import com.example.weatherapp.model.json_processing.Forecastday
+import com.example.weatherapp.model.Forecastday
 import com.example.weatherapp.view.adapter.ForecastRecyclerViewAdapter
 
 

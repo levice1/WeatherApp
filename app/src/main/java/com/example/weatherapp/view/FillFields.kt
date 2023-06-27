@@ -1,4 +1,4 @@
-package com.example.weatherapp.viewmodel
+package com.example.weatherapp.view
 
 import android.annotation.SuppressLint
 import android.view.View
@@ -6,8 +6,9 @@ import com.example.weatherapp.databinding.FragmentDetailsWeatherInfoBinding
 import com.example.weatherapp.databinding.FragmentMainWeatherInfoBinding
 import com.example.weatherapp.model.DetailListModel
 import com.example.weatherapp.model.json_processing.JsonWeatherParse
+import com.example.weatherapp.model.models.DetailListModel
 
-    fun fillDetailsSection(items: DetailListModel, binding: FragmentDetailsWeatherInfoBinding){
+fun fillDetailsSection(items: DetailListModel, binding: FragmentDetailsWeatherInfoBinding){
         // FEELS LIKE
         binding.imgLabelFeelsLike.setImageResource(items.feelsLike.iconId)
         binding.txtLabelFeelsLike.text = items.feelsLike.labelText

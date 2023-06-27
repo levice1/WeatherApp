@@ -4,8 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapp.databinding.HourlyItemRecViewBinding
-import com.example.weatherapp.model.json_processing.Hour
-import com.example.weatherapp.viewmodel.network.getImgFromUrl
+import com.example.weatherapp.model.Hour
+import com.example.weatherapp.network.getImgFromUrl
 
 class HourlyRecyclerViewAdapter: RecyclerView.Adapter<HourlyRecyclerViewAdapter.ViewHolder>() {
 

@@ -1,4 +1,4 @@
-package com.example.weatherapp.viewmodel.network
+package com.example.weatherapp.network
 
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull

@@ -5,8 +5,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapp.databinding.ForecastItemRecViewBinding
-import com.example.weatherapp.model.json_processing.Forecastday
-import com.example.weatherapp.viewmodel.network.getImgFromUrl
+import com.example.weatherapp.model.Forecastday
+import com.example.weatherapp.network.getImgFromUrl
 
 class ForecastRecyclerViewAdapter : RecyclerView.Adapter<ForecastRecyclerViewAdapter.ViewHolder>() {
 

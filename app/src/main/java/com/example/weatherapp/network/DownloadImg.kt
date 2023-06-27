@@ -1,4 +1,4 @@
-package com.example.weatherapp.viewmodel.network
+package com.example.weatherapp.network
 
 import android.widget.ImageView
 import com.example.weatherapp.R

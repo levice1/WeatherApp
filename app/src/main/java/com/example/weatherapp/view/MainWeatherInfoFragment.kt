@@ -9,10 +9,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapp.databinding.FragmentMainWeatherInfoBinding
-import com.example.weatherapp.model.ResponceForFragsDataModel
-import com.example.weatherapp.model.json_processing.Hour
+import com.example.weatherapp.model.Hour
 import com.example.weatherapp.view.adapter.HourlyRecyclerViewAdapter
-import com.example.weatherapp.viewmodel.fillMainSection
 import java.util.Calendar
 
 class MainWeatherInfoFragment : Fragment() {

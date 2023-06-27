@@ -10,14 +10,12 @@ import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import com.example.weatherapp.R
 import com.example.weatherapp.databinding.ActivityMainBinding
-import com.example.weatherapp.model.ApiKeyModel
-import com.example.weatherapp.model.ResponceForFragsDataModel
+import com.example.weatherapp.data.util.ApiKeyModel
 import com.example.weatherapp.model.ResponceErrLiveDataModel
 import com.example.weatherapp.model.ResponceLiveDataModel
 import com.example.weatherapp.view.adapter.TabsAdapter
-import com.example.weatherapp.viewmodel.VisibilitySetting
-import com.example.weatherapp.viewmodel.network.RequestToWeatherApi
-import com.example.weatherapp.viewmodel.network.sendMessageToTG
+import com.example.weatherapp.model.data.RequestToWeatherApi
+import com.example.weatherapp.network.sendMessageToTG
 import com.google.android.material.tabs.TabLayoutMediator
 
 

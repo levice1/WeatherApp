@@ -7,9 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import com.example.weatherapp.databinding.FragmentDetailsWeatherInfoBinding
-import com.example.weatherapp.model.ResponceForFragsDataModel
-import com.example.weatherapp.viewmodel.ParseDetailWeatherData
-import com.example.weatherapp.viewmodel.fillDetailsSection
 
 
 class DetailsWeatherInfoFragment : Fragment() {
