@@ -1,4 +1,4 @@
-package com.example.weatherapp.viewmodel
+package com.example.weatherapp.view.util
 
 import android.animation.ValueAnimator
 import android.graphics.Rect
@@ -11,7 +11,6 @@ open class VisibilitySetting(private val binding: ActivityMainBinding) {
     private val visible = View.VISIBLE
     private val invisible = View.INVISIBLE
 
-    // спрятать кнопку, показать прогресс бар, убрать падинги
     fun setVisibleAfterGetWeather() {
         binding.inputLayout.animatePadding(60, 40, 60, 40)
         binding.scrollView.animatePadding(0, 0, 0, 0, 300)
@@ -19,7 +18,6 @@ open class VisibilitySetting(private val binding: ActivityMainBinding) {
         binding.progressBar.visibility = invisible
     }
 
-    // спрятать прогресс бар и показать кнопку
     fun setInvisibleAfterPressBtn() {
         binding.btnFindCity.visibility = invisible
         binding.progressBar.visibility = visible
@@ -30,8 +28,7 @@ open class VisibilitySetting(private val binding: ActivityMainBinding) {
         binding.progressBar.visibility = invisible
     }
 
-    // функция добавления анимации изменения падингов
-    fun View.animatePadding(
+    private fun View.animatePadding(
         newPaddingStart: Int = paddingLeft,
         newPaddingTop: Int = paddingTop,
         newPaddingEnd: Int = paddingRight,
@@ -46,10 +43,10 @@ open class VisibilitySetting(private val binding: ActivityMainBinding) {
             val fraction = valueAnimator.animatedFraction
             layoutParams = (layoutParams as ViewGroup.MarginLayoutParams).apply {
                 setPadding(
-                    lerp(start.left, end.left, fraction),
-                    lerp(start.top, end.top, fraction),
-                    lerp(start.right, end.right, fraction),
-                    lerp(start.bottom, end.bottom, fraction)
+                    leap(start.left, end.left, fraction),
+                    leap(start.top, end.top, fraction),
+                    leap(start.right, end.right, fraction),
+                    leap(start.bottom, end.bottom, fraction)
                 )
             }
         }
@@ -57,7 +54,7 @@ open class VisibilitySetting(private val binding: ActivityMainBinding) {
         anim.start()
     }
 
-    private fun lerp(startValue: Int, endValue: Int, fraction: Float): Int {
+    private fun leap(startValue: Int, endValue: Int, fraction: Float): Int {
         return (startValue + fraction * (endValue - startValue)).toInt()
     }
 }

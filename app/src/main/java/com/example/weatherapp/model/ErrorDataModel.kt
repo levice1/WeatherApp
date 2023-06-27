@@ -1,6 +1,6 @@
 package com.example.weatherapp.model
 
-data class ResponceErrDataModel(
+data class ErrorDataModel(
     val code: Int,
     val message: String
-):java.io.Serializable
+)

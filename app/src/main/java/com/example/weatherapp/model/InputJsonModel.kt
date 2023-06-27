@@ -1,10 +1,10 @@
-package com.example.weatherapp.model.json_processing
+package com.example.weatherapp.model
 
-data class JsonWeatherParse(
+data class InputJsonModel(
     val current: Current,
     val forecast: Forecast,
     val location: Location
-):java.io.Serializable
+)
 
 data class Current(
     val cloud: Int,
@@ -30,11 +30,11 @@ data class Current(
     val wind_dir: String,
     val wind_kph: Double,
     val wind_mph: Double
-):java.io.Serializable
+)
 
 data class Forecast(
     val forecastday: List<Forecastday>
-):java.io.Serializable
+)
 
 data class Forecastday(
     val astro: Astro,
@@ -42,7 +42,7 @@ data class Forecastday(
     val date_epoch: Int,
     val day: Day,
     val hour: List<Hour>
-):java.io.Serializable
+)
 
 data class Hour(
     val chance_of_rain: Int,
@@ -78,13 +78,13 @@ data class Hour(
     val wind_mph: Double,
     val windchill_c: Double,
     val windchill_f: Double
-):java.io.Serializable
+)
 
 data class Condition(
     val code: Int,
     val icon: String,
     val text: String
-):java.io.Serializable
+)
 
 data class Location(
     val country: String,
@@ -95,7 +95,7 @@ data class Location(
     val name: String,
     val region: String,
     val tz_id: String
-):java.io.Serializable
+)
 
 data class Day(
     val avghumidity: Double,
@@ -118,7 +118,7 @@ data class Day(
     val totalprecip_mm: Double,
     val totalsnow_cm: Double,
     val uv: Double
-):java.io.Serializable
+)
 
 data class Astro(
     val moon_illumination: String,
@@ -127,5 +127,5 @@ data class Astro(
     val moonset: String,
     val sunrise: String,
     val sunset: String
-):java.io.Serializable
+)
 

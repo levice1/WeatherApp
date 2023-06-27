@@ -1,16 +1,15 @@
 package com.example.weatherapp.view.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapp.databinding.HourlyItemRecViewBinding
-import com.example.weatherapp.model.json_processing.Hour
-import com.example.weatherapp.viewmodel.network.getImgFromUrl
+import com.example.weatherapp.model.Hour
+import com.example.weatherapp.view.util.downloadImgFromUrl
 
 class HourlyRecyclerViewAdapter: RecyclerView.Adapter<HourlyRecyclerViewAdapter.ViewHolder>() {
-
     inner class ViewHolder(val binding: HourlyItemRecViewBinding): RecyclerView.ViewHolder(binding.root)
-
 
     private var detailsList = ArrayList<Hour>()
 
@@ -25,7 +24,7 @@ class HourlyRecyclerViewAdapter: RecyclerView.Adapter<HourlyRecyclerViewAdapter.
         holder.binding.txtTime.text = time
         holder.binding.txtHourTemperature.text = detailsList[position].temp_c.toString()
         holder.binding.txtHourWeather.text = detailsList[position].condition.text
-        getImgFromUrl(
+        downloadImgFromUrl(
             detailsList[position].condition.icon,
             holder.binding.imgHour
         )
@@ -37,6 +36,7 @@ class HourlyRecyclerViewAdapter: RecyclerView.Adapter<HourlyRecyclerViewAdapter.
     }
 
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setList(list: List<Hour>) {
         detailsList.addAll(list)
         notifyDataSetChanged()

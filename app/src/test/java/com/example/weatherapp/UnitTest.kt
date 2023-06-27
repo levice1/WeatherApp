@@ -1,10 +1,10 @@
 package com.example.weatherapp
 //
 //import androidx.lifecycle.MutableLiveData
-//import com.example.weatherapp.model.ApiKeyModel
+//import com.example.weatherapp.model.data.util.ApiKeyModel
 //import com.example.weatherapp.model.ResponceErrDataModel
 //import com.example.weatherapp.model.json_processing.JsonWeatherParse
-//import com.example.weatherapp.viewmodel.network.RequestToWeatherApi
+//import com.example.weatherapp.model.data.RequestToWeatherApi
 //import org.junit.Test
 //
 //import org.junit.Assert.*

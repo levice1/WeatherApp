@@ -1,4 +1,4 @@
-package com.example.weatherapp.view
+package com.example.weatherapp.view.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,16 +9,16 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapp.databinding.FragmentMainWeatherInfoBinding
-import com.example.weatherapp.model.ResponceForFragsDataModel
-import com.example.weatherapp.model.json_processing.Hour
+import com.example.weatherapp.model.Hour
 import com.example.weatherapp.view.adapter.HourlyRecyclerViewAdapter
-import com.example.weatherapp.viewmodel.fillMainSection
+import com.example.weatherapp.view.util.fillFieldsInMainFragment
+import com.example.weatherapp.view_model.WeatherViewModel
 import java.util.Calendar
 
 class MainWeatherInfoFragment : Fragment() {
 
-    lateinit var binding: FragmentMainWeatherInfoBinding
-    private val responceForFragsDataModel: ResponceForFragsDataModel by activityViewModels()
+    private lateinit var binding: FragmentMainWeatherInfoBinding
+    private val viewModel: WeatherViewModel by activityViewModels()
 
     private lateinit var adapter: HourlyRecyclerViewAdapter
     private lateinit var recyclerView: RecyclerView
@@ -32,11 +32,11 @@ class MainWeatherInfoFragment : Fragment() {
     }
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        responceForFragsDataModel.data.observe(this@MainWeatherInfoFragment) {
-            fillMainSection(it, binding)
-            initHourlyRecView(it.forecast.forecastday[0].hour)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel.weatherDataByCity.observe(viewLifecycleOwner) {
+            fillFieldsInMainFragment(it.main, binding)
+            initHourlyRecView(it.forecast[0].hour)
             scrollHourlyRecView()
         }
     }
@@ -57,7 +57,7 @@ class MainWeatherInfoFragment : Fragment() {
     }
 
 
-    // скролл RecView до текущего времени
+    // scroll recycler view to current time in device
      private fun scrollHourlyRecView(){
          val hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
          recyclerView.layoutManager = LinearLayoutManager(

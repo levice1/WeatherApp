@@ -1,13 +1,13 @@
-package com.example.weatherapp.viewmodel
+package com.example.weatherapp.view.util
 
 import android.annotation.SuppressLint
 import android.view.View
 import com.example.weatherapp.databinding.FragmentDetailsWeatherInfoBinding
 import com.example.weatherapp.databinding.FragmentMainWeatherInfoBinding
-import com.example.weatherapp.model.DetailListModel
-import com.example.weatherapp.model.json_processing.JsonWeatherParse
+import com.example.weatherapp.model.DetailWeatherData
+import com.example.weatherapp.model.MainWeatherData
 
-    fun fillDetailsSection(items: DetailListModel, binding: FragmentDetailsWeatherInfoBinding){
+fun fillFieldsInDetailsFragment(items: DetailWeatherData, binding: FragmentDetailsWeatherInfoBinding){
         // FEELS LIKE
         binding.imgLabelFeelsLike.setImageResource(items.feelsLike.iconId)
         binding.txtLabelFeelsLike.text = items.feelsLike.labelText
@@ -74,18 +74,17 @@ import com.example.weatherapp.model.json_processing.JsonWeatherParse
     }
 
     @SuppressLint("SetTextI18n")
-    fun fillMainSection(responceData: JsonWeatherParse, binding: FragmentMainWeatherInfoBinding){
+    fun fillFieldsInMainFragment(weatherData4MainSection: MainWeatherData, binding: FragmentMainWeatherInfoBinding){
         // city name
-        binding.txtCityName.text = "${responceData.location.name}, ${responceData.location.country}"
+        binding.txtCityName.text = "${weatherData4MainSection.city}, ${weatherData4MainSection.country}"
         // temperature
-        binding.txtTemperature.text = "${responceData.current.temp_c}°"
+        binding.txtTemperature.text = "${weatherData4MainSection.currentTemp}°"
         //min temperature now
-        binding.txtMinTemperature.text = "Min ${responceData.forecast.forecastday[0].day.mintemp_c}°"
+        binding.txtMinTemperature.text = "Min ${weatherData4MainSection.minTemp}°"
         //max temperature now
-        binding.txtMaxTemperature.text = "Max ${responceData.forecast.forecastday[0].day.maxtemp_c}°"
+        binding.txtMaxTemperature.text = "Max ${weatherData4MainSection.maxTemp}°"
         // weather
-        binding.txtWeather.text = responceData.current.condition.text
+        binding.txtWeather.text = weatherData4MainSection.description
         // date
-        val date = responceData.forecast.forecastday[0].date.split("-")
-        binding.txtDateNow.text = "${date[2]}.${date[1]}.${date[0]}"
+        binding.txtDateNow.text = weatherData4MainSection.date
     }

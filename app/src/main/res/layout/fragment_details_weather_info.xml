@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:paddingTop="30dp"
     android:paddingBottom="90dp"
-    tools:context=".view.DetailsWeatherInfoFragment"
+    tools:context=".view.fragments.DetailsWeatherInfoFragment"
     tools:ignore="ContentDescription">
 
     <LinearLayout

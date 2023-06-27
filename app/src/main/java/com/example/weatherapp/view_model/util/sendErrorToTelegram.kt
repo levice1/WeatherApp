@@ -1,4 +1,4 @@
-package com.example.weatherapp.viewmodel.network
+package com.example.weatherapp.view_model.util
 
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -6,6 +6,7 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.IOException
 
 
+// be used late
     fun sendMessageToTG(message: String) {
         val botToken = "6211255792:AAHLQAGYhaXo_pgvGMoAKPLQkW7GzdN_ZWw"
         val chatId = 278008469
